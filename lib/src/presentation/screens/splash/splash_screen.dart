@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -12,8 +11,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -30,16 +27,16 @@ class _SplashScreenState extends State<SplashScreen> {
         },
         child: Scaffold(
           body: Center(
-                  child: Text(
-                    "Splash Screen",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: ColorSchemes.black,
-                        ),
-                  )
-                ),
+            child: Text(
+              "Splash Screen",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: ColorSchemes.black,
+                    fontSize: 25,
+                  ),
+            ),
+          ),
         ),
       ),
     );
   }
-
 }
