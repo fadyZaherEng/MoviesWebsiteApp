@@ -114,7 +114,7 @@ class AppTheme {
           size: 24,
         ),
       ),
-      scaffoldBackgroundColor: Colors.black38,
+      scaffoldBackgroundColor: Colors.black.withOpacity(0.7),
       primaryColor: ColorSchemes.primary,
       drawerTheme: DrawerThemeData(
         backgroundColor: Colors.black38,
