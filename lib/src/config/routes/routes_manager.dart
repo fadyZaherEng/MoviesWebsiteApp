@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movies_website_apps/main.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing_app/landing_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/splash/splash_screen.dart';
 
 class Routes {
-
   static const String splash = "/";
   static const String landing = "/landing";
+
   //web
   static const String landingWeb = "/";
 }
@@ -47,37 +49,39 @@ class RoutesManager {
 
 final GlobalKey<NavigatorState> webNavigatorKey = GlobalKey<NavigatorState>();
 
-// final GoRouter webRouter = GoRouter(
-//   initialLocation: Routes.landingWeb,
-//   debugLogDiagnostics: true,
-//   navigatorKey: webNavigatorKey,
-//   observers: [routeObserver],
-//   routes: [
-//     GoRoute(
-//         path: Routes.landingWeb,
-//         name: Routes.landingWeb,
-//         builder: (context, state) => const LandingScreen()),
-//     GoRoute(
-//         path: Routes.webUnits,
-//         name: Routes.webUnits,
-//         builder: (context, state) => const UnitsWebScreen()),
-//     GoRoute(
-//         path: "${Routes.unitDetailsWebById}/:id",
-//         builder: (context, state) => UnitDetailsWebScreen(
-//             unitId: int.parse(state.pathParameters["id"] ?? "0"))),
-//     GoRoute(
-//         path: "${Routes.unitDetailsWeb}/:id",
-//         builder: (context, state) => UnitDetailsWebScreen(
-//             unitId: int.parse(state.pathParameters["id"] ?? "0"))),
-//     GoRoute(
-//         path: Routes.contactUs,
-//         name: Routes.contactUs,
-//         builder: (context, state) => const ContactUsScreen()),
-//     GoRoute(
-//         path: Routes.webContactUs,
-//         name: Routes.webContactUs,
-//         builder: (context, state) => const ContactUsScreen()),
-//   ],
-// );
-
-
+final GoRouter webRouter = GoRouter(
+  initialLocation: Routes.splash,
+  debugLogDiagnostics: true,
+  navigatorKey: webNavigatorKey,
+  observers: [routeObserver],
+  routes: [
+    GoRoute(
+        path: Routes.landing,
+        name: Routes.landing,
+        builder: (context, state) => const LandingScreen()),
+    GoRoute(
+        path: Routes.splash,
+        name: Routes.splash,
+        builder: (context, state) => const SplashScreen()),
+    // GoRoute(
+    //     path: Routes.webUnits,
+    //     name: Routes.webUnits,
+    //     builder: (context, state) => const UnitsWebScreen()),
+    // GoRoute(
+    //     path: "${Routes.unitDetailsWebById}/:id",
+    //     builder: (context, state) => UnitDetailsWebScreen(
+    //         unitId: int.parse(state.pathParameters["id"] ?? "0"))),
+    // GoRoute(
+    //     path: "${Routes.unitDetailsWeb}/:id",
+    //     builder: (context, state) => UnitDetailsWebScreen(
+    //         unitId: int.parse(state.pathParameters["id"] ?? "0"))),
+    // GoRoute(
+    //     path: Routes.contactUs,
+    //     name: Routes.contactUs,
+    //     builder: (context, state) => const ContactUsScreen()),
+    // GoRoute(
+    //     path: Routes.webContactUs,
+    //     name: Routes.webContactUs,
+    //     builder: (context, state) => const ContactUsScreen()),
+  ],
+);

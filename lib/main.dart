@@ -32,7 +32,7 @@ Future<void> main() async {
         await _initializeFirebaseServices();
       } else {
         final int resultCode =
-            await HmsApiAvailability().isHMSAvailableWithApkVersion(28);
+        await HmsApiAvailability().isHMSAvailableWithApkVersion(28);
         if (resultCode == 1) {
           await _initializeFirebaseServices();
         } else {
@@ -104,53 +104,50 @@ class _MyAppState extends State<MyApp> {
                       Navigator.of(navigatorKey.currentContext ?? context)
                           .pop();
                       NetworkConnectivity.instance.isShowNoInternetDialog =
-                          false;
+                      false;
                     }
                   }
                 }
                 return Portal(
                   child: Provider.value(
                     value: routeObserver,
-                    child: kIsWeb
-                        ? MaterialApp.router(
-                            // routerConfig: webRouter,
-                            themeMode: ThemeMode.light,
-                            supportedLocales: S.delegate.supportedLocales,
-                            localizationsDelegates: const [
-                              S.delegate,
-                              GlobalMaterialLocalizations.delegate,
-                              GlobalWidgetsLocalizations.delegate,
-                              GlobalCupertinoLocalizations.delegate,
-                            ],
-                            debugShowCheckedModeBanner: false,
-                            // title:S.of(context).appTitle,
-                            theme: AppTheme(state.languageCode).light,
-                            locale: state,
-                          )
+                    child: kIsWeb ? MaterialApp.router(
+                      routerConfig: webRouter,
+                      themeMode: ThemeMode.light,
+                      supportedLocales: S.delegate.supportedLocales,
+                      localizationsDelegates: const [
+                        S.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      debugShowCheckedModeBanner: false,
+                      theme: AppTheme(state.languageCode).light,
+                      locale: state,
+                    )
                         : MaterialApp(
-                            // useInheritedMediaQuery: true,
-                            // builder: DevicePreview.appBuilder,
-                            // darkTheme:AppTheme(state.languageCode).light,
-                            navigatorKey: navigatorKey,
-                            navigatorObservers: [
-                              ChuckerFlutter.navigatorObserver,
-                              routeObserver,
-                            ],
-                            themeMode: ThemeMode.light,
-                            supportedLocales: S.delegate.supportedLocales,
-                            onGenerateRoute: RoutesManager.getRoute,
-                            initialRoute: Routes.splash,
-                            // title: S.of(context).appTitle,
-                            localizationsDelegates: const [
-                              S.delegate,
-                              GlobalMaterialLocalizations.delegate,
-                              GlobalWidgetsLocalizations.delegate,
-                              GlobalCupertinoLocalizations.delegate,
-                            ],
-                            debugShowCheckedModeBanner: false,
-                            theme: AppTheme(state.languageCode).light,
-                            locale: state,
-                          ),
+                      // useInheritedMediaQuery: true,
+                      // builder: DevicePreview.appBuilder,
+                      // darkTheme:AppTheme(state.languageCode).light,
+                      navigatorKey: navigatorKey,
+                      navigatorObservers: [
+                        ChuckerFlutter.navigatorObserver,
+                        routeObserver,
+                      ],
+                      themeMode: ThemeMode.light,
+                      supportedLocales: S.delegate.supportedLocales,
+                      onGenerateRoute: RoutesManager.getRoute,
+                      initialRoute: Routes.splash,
+                      localizationsDelegates: const [
+                        S.delegate,
+                        GlobalMaterialLocalizations.delegate,
+                        GlobalWidgetsLocalizations.delegate,
+                        GlobalCupertinoLocalizations.delegate,
+                      ],
+                      debugShowCheckedModeBanner: false,
+                      theme: AppTheme(state.languageCode).light,
+                      locale: state,
+                    ),
                   ),
                 );
               });
