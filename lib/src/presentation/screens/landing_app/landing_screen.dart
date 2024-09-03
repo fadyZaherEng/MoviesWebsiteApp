@@ -43,26 +43,42 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 10),
+                  Text("Top Rated Movies",
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: ColorSchemes.white,
+                          )),
                   const SizedBox(height: 20),
-                  Text(
-                    "Top Rated Movies",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: ColorSchemes.white,
-                    )
-                  ),
-                  const SizedBox(height: 20),
-                  const Row(
+                  Row(
                     children: [
-                      Expanded(
+                      const Expanded(
                         flex: 2,
                         child: CarouselSkeleton(),
                       ),
                       Expanded(
                         flex: 1,
-                        child: NowPlayingSkeleton(),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Now Playing",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(color: ColorSchemes.white),
+                            ),
+                            const SizedBox(height: 20),
+                            const NowPlayingSkeleton(),
+                          ],
+                        ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20),
+                  Text("Explore Popular Movies",
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: ColorSchemes.white,
+                          )),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
