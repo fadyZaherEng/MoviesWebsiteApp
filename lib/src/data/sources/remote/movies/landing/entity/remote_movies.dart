@@ -29,20 +29,20 @@ class RemoteMovies {
   final int? voteCount;
 
   const RemoteMovies({
-    this.adult,
-    this.backdropPath,
-    this.genreIds,
-    this.id,
-    this.originalLanguage,
-    this.originalTitle,
-    this.overview,
-    this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    this.title,
-    this.video,
-    this.voteAverage,
-    this.voteCount,
+    this.adult = false,
+    this.backdropPath = "",
+    this.genreIds = const [],
+    this.id = 0,
+    this.originalLanguage = "",
+    this.originalTitle = "",
+    this.overview = "",
+    this.popularity = 0.0,
+    this.posterPath = "",
+    this.releaseDate = "",
+    this.title = "",
+    this.video = false,
+    this.voteAverage = 0.0,
+    this.voteCount = 0,
   });
 
   factory RemoteMovies.fromJson(Map<String, dynamic> json) =>
@@ -50,26 +50,27 @@ class RemoteMovies {
 
   Map<String, dynamic> toJson() => _$RemoteMoviesToJson(this);
 }
+
 extension RemoteMoviesExtension on RemoteMovies {
   Movies mapToDomain() {
     return Movies(
-      adult: adult??false,
-      backdropPath: backdropPath??"",
-      genreIds: genreIds??[],
-      id: id??0,
-      originalLanguage: originalLanguage??"",
-      originalTitle: originalTitle??"",
-      overview: overview??"",
-      popularity: popularity??0.0,
-      posterPath: posterPath??"",
-      releaseDate: releaseDate??"",
-      title: title??"",
-      video: video??false,
-      voteAverage: voteAverage??0.0,
-      voteCount: voteCount??0
-    );
+        adult: adult ?? false,
+        backdropPath: backdropPath ?? "",
+        genreIds: genreIds ?? [],
+        id: id ?? 0,
+        originalLanguage: originalLanguage ?? "",
+        originalTitle: originalTitle ?? "",
+        overview: overview ?? "",
+        popularity: popularity ?? 0.0,
+        posterPath: posterPath ?? "",
+        releaseDate: releaseDate ?? "",
+        title: title ?? "",
+        video: video ?? false,
+        voteAverage: voteAverage ?? 0.0,
+        voteCount: voteCount ?? 0);
   }
 }
+
 extension RemoteMoviesListExtension on List<RemoteMovies> {
   List<Movies> mapToDomain() {
     return map((e) => e.mapToDomain()).toList();
