@@ -30,7 +30,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
           appBar: CustomAppBarWidget(
             isDrawerOpen: _isDrawerOpen,
             onDrawerPressed: () {
-              _isDrawerOpen = !_isDrawerOpen;
+              _isDrawerOpen = false;
               setState(() {});
             },
           ),

@@ -2,38 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 
-class CustomAppBarWidget extends StatelessWidget
-    implements PreferredSizeWidget {
-  final bool isDrawerOpen;
+class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
+  bool isDrawerOpen;
   final void Function() onDrawerPressed;
 
-  const CustomAppBarWidget({
+  CustomAppBarWidget({
     super.key,
-    required this.isDrawerOpen,
+    this.isDrawerOpen = false,
     required this.onDrawerPressed,
   });
 
   @override
+  State<CustomAppBarWidget> createState() => _State();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _State extends State<CustomAppBarWidget> {
+  @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: isDrawerOpen
+      leading: widget.isDrawerOpen
           ? null
           : Builder(
               builder: (context) {
                 return IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.menu,
-                    color: ColorSchemes.primary,
+                    color: ColorSchemes.white,
                   ),
                   onPressed: () {
-                    onDrawerPressed();
+                    widget.isDrawerOpen = true;
+                    // widget.onDrawerPressed();
+                    setState(() {});
                     Scaffold.of(context).openDrawer();
                   },
                 );
               },
             ),
       title: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -53,35 +62,64 @@ class CustomAppBarWidget extends StatelessWidget
             const SizedBox(
               width: 15,
             ),
-            SizedBox(
-              //how to add number in routing from city eye
+            Container(
+//how to add number in routing from city eye
               width: MediaQuery.of(context).size.width * 0.55,
-              height: 45,
-              child: TextField(
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      color: ColorSchemes.gray,
+              height: 40,
+              decoration: BoxDecoration(
+                color: ColorSchemes.white,
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: ColorSchemes.white),
+              ),
+              child: Center(
+                child: TextField(
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic,
+                        color: ColorSchemes.black,
+                      ),
+                  onSubmitted: (String value) {
+                    context.go('/search/$value');
+                  },
+                  decoration: InputDecoration(
+                    fillColor: ColorSchemes.white,
+                    focusColor: ColorSchemes.white,
+                    hoverColor: ColorSchemes.white,
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Icon(
+                        Icons.clear,
+                        color: ColorSchemes.gray,
+                        size: 15,
+                      ),
                     ),
-                onSubmitted: (String value) {
-                  context.go('/search/$value');
-                },
-                decoration: InputDecoration(
-                    prefixIcon:
-                        const Icon(Icons.clear, color: Color(0xFFE2B616)),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        // context.go('/search/');
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        context.go('/search/');
                       },
-                      icon: const Icon(Icons.cancel, color: Color(0xFFE2B616)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            color: ColorSchemes.gray.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: const Icon(
+                            Icons.close,
+                            color: ColorSchemes.white,
+                            size: 15,
+                          ),
+                        ),
+                      ),
                     ),
                     hintText: "Search...",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
-                      borderSide: const BorderSide(
-                        color: Color(0xFFE2B616),
-                      ),
-                    )),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                  ),
+                ),
               ),
             )
           ],
@@ -89,7 +127,4 @@ class CustomAppBarWidget extends StatelessWidget
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(55);
 }

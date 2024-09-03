@@ -15,7 +15,7 @@ class AppTheme {
       toggleableActiveColor: ColorSchemes.primary,
       appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: ColorSchemes.white,
+        color: Colors.black38,
         elevation: 0.0,
         shadowColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -114,7 +114,7 @@ class AppTheme {
           size: 24,
         ),
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: Colors.black38,
       primaryColor: ColorSchemes.primary,
       drawerTheme: DrawerThemeData(
         backgroundColor: Colors.black38,

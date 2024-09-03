@@ -17,22 +17,40 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                    color: ColorSchemes.white,
+                  ),
+                  onPressed: () {
+                        onTap();
+                        Scaffold.of(context).closeDrawer();
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 35),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  onTap();
-                  Scaffold.of(context).closeDrawer();
-                },
-              ),
-              const SizedBox(width: 10),
+              // IconButton(
+              //   icon: const Icon(
+              //     Icons.menu,
+              //     color: Colors.white,
+              //   ),
+              //   onPressed: () {
+              //     onTap();
+              //     Scaffold.of(context).closeDrawer();
+              //   },
+              // ),
+              const SizedBox(width: 20),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
