@@ -37,7 +37,7 @@ class CustomDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   TextButton(
                     onPressed: () {
                       context.go(Routes.landingWeb);

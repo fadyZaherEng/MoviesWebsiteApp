@@ -40,9 +40,9 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                 : Builder(
                     builder: (context) {
                       return IconButton(
-                        icon: const Icon(
+                        icon:  Icon(
                           Icons.menu,
-                          color: Colors.purpleAccent,
+                          color: ColorSchemes.primary,
                         ),
                         onPressed: () {
                           Scaffold.of(context).openDrawer();
