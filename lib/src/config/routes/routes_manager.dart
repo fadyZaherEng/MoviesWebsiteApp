@@ -10,7 +10,8 @@ class Routes {
   static const String landing = "/landing";
 
   //web
-  static const String landingWeb = "/";
+  static const String landingWeb = "/TMDBMovies";
+  static const String movies="/movies";
 }
 
 class RoutesManager {
@@ -56,8 +57,8 @@ final GoRouter webRouter = GoRouter(
   observers: [routeObserver],
   routes: [
     GoRoute(
-        path: Routes.landing,
-        name: Routes.landing,
+        path: Routes.landingWeb,
+        name: Routes.landingWeb,
         builder: (context, state) => const LandingScreen()),
     GoRoute(
         path: Routes.splash,

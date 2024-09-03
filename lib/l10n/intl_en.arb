@@ -1,3 +1,5 @@
 {
-  "appTitle": "Movie Website"
+  "appTitle": "Movie Website",
+  "home": "Home",
+  "movies": "Movies"
 }

@@ -116,6 +116,21 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: Colors.white,
       primaryColor: ColorSchemes.primary,
+      drawerTheme: DrawerThemeData(
+        backgroundColor: Colors.black38,
+        elevation: 10,
+        width: 250,
+        surfaceTintColor: ColorSchemes.primary,
+        // scrimColor: ColorSchemes.primary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
+
+      ),
+      iconTheme:  IconThemeData(color: ColorSchemes.primary, size: 24),
       splashColor: Colors.transparent,
     );
   }

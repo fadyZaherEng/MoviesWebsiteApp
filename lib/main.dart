@@ -121,6 +121,7 @@ class _MyAppState extends State<MyApp> {
                         GlobalWidgetsLocalizations.delegate,
                         GlobalCupertinoLocalizations.delegate,
                       ],
+                      title: "TMDB Movie Website",
                       debugShowCheckedModeBanner: false,
                       theme: AppTheme(state.languageCode).light,
                       locale: state,
@@ -130,6 +131,7 @@ class _MyAppState extends State<MyApp> {
                       // builder: DevicePreview.appBuilder,
                       // darkTheme:AppTheme(state.languageCode).light,
                       navigatorKey: navigatorKey,
+                      title: "TMDB Movie Website",
                       navigatorObservers: [
                         ChuckerFlutter.navigatorObserver,
                         routeObserver,
