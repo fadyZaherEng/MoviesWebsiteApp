@@ -49,7 +49,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
   @override
   Widget baseBuild(BuildContext context) {
     return BlocConsumer<LandingBloc, LandingState>(
-        listener: (context, state) {
+    listener: (context, state) {
       if (state is LandingPlayNowSuccess) {
         _moviesPlayNow = state.movies;
       } else if (state is LandingTopRatedSuccess) {
@@ -61,6 +61,8 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
       } else if (state is LandingUpcomingSuccess) {
         _moviesUpComing = state.movies;
       } else if (state is LandingPopularSuccess) {
+        _moviesPopular = state.movies;
+      } else if (state is LandingSearchSuccess) {
         _moviesPopular = state.movies;
       } else if (state is LandingTopRatedError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -74,6 +76,9 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message ?? ""),
         ));
+      } else if (state is LandingSearchError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.message ?? "")));
       }
     }, builder: (context, state) {
       return LayoutBuilder(
@@ -91,6 +96,17 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
               onDrawerPressed: () {
                 _isDrawerOpen = false;
                 setState(() {});
+              },
+              onSearchPressed: (String query) {
+                _bloc.add(
+                  LandingSearchEvent(
+                    queryParametersRequest: QueryParametersRequest(
+                      language: "en",
+                      page: 1,
+                      query: query,
+                    ),
+                  ),
+                );
               },
             ),
             body: SingleChildScrollView(

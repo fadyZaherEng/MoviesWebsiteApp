@@ -35,4 +35,10 @@ abstract class LandingApiServices {
       @Body() TMDBRequest request,
       @Queries() QueryParametersRequest queryParametersRequest,
       );
+  @GET(APIKeys.search)
+  Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> searchMovies(
+      @Body() TMDBRequest request,
+      @Queries() QueryParametersRequest queryParametersRequest,
+      );
+
 }

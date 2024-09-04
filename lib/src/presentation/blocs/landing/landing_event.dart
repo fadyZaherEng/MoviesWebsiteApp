@@ -33,3 +33,10 @@ class LandingUpcomingEvent extends LandingEvent {
     required this.queryParametersRequest,
   });
 }
+class LandingSearchEvent extends LandingEvent {
+  final QueryParametersRequest queryParametersRequest;
+
+  LandingSearchEvent({
+    required this.queryParametersRequest,
+  });
+}

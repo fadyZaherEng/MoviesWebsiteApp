@@ -8,6 +8,8 @@ import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_play_now_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_pupolar_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_top_rated_use_case.dart';
+import 'package:movies_website_apps/src/domain/usecase/landing/get_up_coming_use_case.dart';
+import 'package:movies_website_apps/src/domain/usecase/landing/search_movies_use_case.dart';
 
 part 'landing_event.dart';
 
@@ -17,16 +19,21 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
   final GetPlayNowUseCase _getPlayNowUseCase;
   final GetTopRatedUseCase _getTopRatedMoviesUseCase;
   final GetPopularUseCase _getPopularMoviesUseCase;
+  final GetUpComingUseCase _getUpcomingMoviesUseCase;
+  final SearchMoviesUseCase _searchMoviesUseCase;
 
   LandingBloc(
     this._getPlayNowUseCase,
     this._getTopRatedMoviesUseCase,
     this._getPopularMoviesUseCase,
+    this._getUpcomingMoviesUseCase,
+    this._searchMoviesUseCase,
   ) : super(LandingInitial()) {
     on<LandingPlayNowEvent>(_onLandingPlayNowEvent);
     on<LandingTopRatedEvent>(_onLandingTopRatedEvent);
     on<LandingPopularEvent>(_onLandingPopularEvent);
     on<LandingUpcomingEvent>(_onLandingUpcomingEvent);
+    on<LandingSearchEvent>(_onLandingSearchEvent);
   }
 
   FutureOr<void> _onLandingPlayNowEvent(
@@ -68,12 +75,24 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
   FutureOr<void> _onLandingUpcomingEvent(
       LandingUpcomingEvent event, Emitter<LandingState> emit) async {
     emit(LandingUpcomingLoading());
-    DataState<List<Movie>> result =
-        await _getPopularMoviesUseCase.getPopular(event.queryParametersRequest);
+    DataState<List<Movie>> result = await _getUpcomingMoviesUseCase
+        .getUpComing(event.queryParametersRequest);
     if (result is DataSuccess) {
       emit(LandingUpcomingSuccess(movies: result.data ?? []));
     } else {
       emit(LandingUpcomingError(message: result.message ?? "Failed"));
+    }
+  }
+
+  FutureOr<void> _onLandingSearchEvent(
+      LandingSearchEvent event, Emitter<LandingState> emit) async {
+    emit(LandingSearchLoading());
+    DataState<List<Movie>> result =
+        await _searchMoviesUseCase.searchMovies(event.queryParametersRequest);
+    if (result is DataSuccess) {
+      emit(LandingSearchSuccess(movies: result.data ?? []));
+    } else {
+      emit(LandingSearchError(message: result.message ?? "Failed"));
     }
   }
 }

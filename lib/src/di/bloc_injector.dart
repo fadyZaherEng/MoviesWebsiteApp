@@ -10,6 +10,8 @@ Future<void> initializeBlocDependencies() async {
   injector.registerFactory<LandingBloc>(() => LandingBloc(
         injector(),
         injector(),
-       injector(),
-  ));
+        injector(),
+        injector(),
+        injector(),
+      ));
 }

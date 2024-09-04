@@ -5,11 +5,13 @@ import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   bool isDrawerOpen;
   final void Function() onDrawerPressed;
+  final void Function(String) onSearchPressed;
 
   CustomAppBarWidget({
     super.key,
     this.isDrawerOpen = false,
     required this.onDrawerPressed,
+    required this.onSearchPressed,
   });
 
   @override
@@ -63,7 +65,7 @@ class _State extends State<CustomAppBarWidget> {
               width: 15,
             ),
             Container(
-//how to add number in routing from city eye
+            //how to add number in routing from city eye
               width: MediaQuery.of(context).size.width * 0.55,
               height: 40,
               decoration: BoxDecoration(
@@ -80,6 +82,9 @@ class _State extends State<CustomAppBarWidget> {
                       ),
                   onSubmitted: (String value) {
                     context.go('/search/$value');
+                  },
+                  onChanged: (String value) {
+                    widget.onSearchPressed(value);
                   },
                   decoration: InputDecoration(
                     fillColor: ColorSchemes.white,

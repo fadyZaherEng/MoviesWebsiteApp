@@ -3,15 +3,15 @@ import 'package:movies_website_apps/src/data/sources/remote/movies/landing/reque
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:movies_website_apps/src/domain/repositories/landing/landing_repository.dart';
 
-class GetUpComingUseCase {
+class SearchMoviesUseCase {
   final LandingRepository landingRepository;
 
-  GetUpComingUseCase({
+  SearchMoviesUseCase({
     required this.landingRepository,
   });
 
-  Future<DataState<List<Movie>>> getUpComing(
+  Future<DataState<List<Movie>>> searchMovies(
       QueryParametersRequest queryParametersRequest) async {
-    return await landingRepository.getUpcoming(queryParametersRequest);
+    return await landingRepository.searchMovies(queryParametersRequest);
   }
 }

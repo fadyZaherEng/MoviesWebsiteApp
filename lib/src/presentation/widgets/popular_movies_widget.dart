@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
@@ -67,26 +69,47 @@ class _PopularMoviesWidgetState extends State<PopularMoviesWidget> {
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     child: Card(
-                      elevation: _hoverIndex == index ? 20 : 4,
+                      elevation: _hoverIndex == index ? 20 : 0,
                       color: Colors.black12,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
+                          SizedBox(
+                            width: double.infinity,
+                            height: 200,
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8),
                               ),
-                              child: Image.network(
-                                '${Constants.imageBaseUrl}${widget.popularMovies[index].backdropPath}',
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: 200,
-                                matchTextDirection: true,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.error);
-                                },
+                              child: CachedNetworkImage(
+                                  imageUrl:'${Constants.imageBaseUrl}${widget.popularMovies[index].backdropPath}',
+                                  width: double.infinity,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                  errorWidget: (context, error, stackTrace) =>const SkeletonLine(
+                                      style: SkeletonLineStyle(
+                                          width: double.infinity,
+                                          height: 200,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(8),
+                                          topRight: Radius.circular(8),
+                                        ),
+                                      )
+                                  ),
+                                  matchTextDirection: true,
+                                  placeholder: (context, _) {
+                                    return const SkeletonLine(
+                                        style: SkeletonLineStyle(
+                                            width: double.infinity,
+                                            height: 200,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8),
+                                            topRight: Radius.circular(8),
+                                          ),
+                                        )
+                                    );
+                                  }
                               ),
                             ),
                           ),

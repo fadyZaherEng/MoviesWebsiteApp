@@ -56,3 +56,16 @@ final class LandingUpcomingError extends LandingState {
   final String message;
   LandingUpcomingError({required this.message});
 }
+//search movies
+
+final class LandingSearchLoading extends LandingState {}
+
+final class LandingSearchSuccess extends LandingState {
+  final List<Movie> movies;
+  LandingSearchSuccess({required this.movies});
+}
+
+final class LandingSearchError extends LandingState {
+  final String message;
+  LandingSearchError({required this.message});
+}

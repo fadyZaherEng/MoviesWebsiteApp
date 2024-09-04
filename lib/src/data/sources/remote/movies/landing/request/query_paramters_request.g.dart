@@ -17,6 +17,7 @@ QueryParametersRequest _$QueryParametersRequestFromJson(
       withReleaseType: json['with_release_type'] as String?,
       releaseDateGte: json['release_date.gte'] as String?,
       releaseDateLte: json['release_date.lte'] as String?,
+      query: json['query'] as String?,
     );
 
 Map<String, dynamic> _$QueryParametersRequestToJson(
@@ -30,4 +31,5 @@ Map<String, dynamic> _$QueryParametersRequestToJson(
       'with_release_type': instance.withReleaseType,
       'release_date.gte': instance.releaseDateGte,
       'release_date.lte': instance.releaseDateLte,
+      'query': instance.query,
     };

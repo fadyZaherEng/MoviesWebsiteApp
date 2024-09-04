@@ -22,6 +22,8 @@ class QueryParametersRequest {
   String? releaseDateGte;
   @JsonKey(name: 'release_date.lte')
   String? releaseDateLte;
+  @JsonKey(name: "query")
+  String? query;
 
   QueryParametersRequest({
     this.includeAdult ,
@@ -32,6 +34,7 @@ class QueryParametersRequest {
     this.withReleaseType ,
     this.releaseDateGte ,
     this.releaseDateLte ,
+    this.query
   });
 
   factory QueryParametersRequest.fromJson(Map<String, dynamic> json) =>

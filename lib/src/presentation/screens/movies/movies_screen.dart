@@ -43,13 +43,11 @@ class _MoviesScreenState extends State<MoviesScreen> {
         queryParametersRequest:
             QueryParametersRequest(language: "en", page: 1)));
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LandingBloc, LandingState>(
-        listener: (context, state) {
+    return BlocConsumer<LandingBloc, LandingState>(listener: (context, state) {
       if (state is LandingPlayNowSuccess) {
         _nowPlayingMovies = state.movies;
       } else if (state is LandingTopRatedSuccess) {
@@ -62,9 +60,11 @@ class _MoviesScreenState extends State<MoviesScreen> {
         _upcomingMovies = state.movies;
       } else if (state is LandingPopularSuccess) {
         _popularMovies = state.movies;
-        if(_selectedFilterIndex==0){
+        if (_selectedFilterIndex == 0) {
           _currentMovies = _popularMovies;
         }
+      } else if (state is LandingSearchSuccess) {
+        _currentMovies = state.movies;
       } else if (state is LandingTopRatedError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message ?? ""),
@@ -74,6 +74,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
           content: Text(state.message ?? ""),
         ));
       } else if (state is LandingUpcomingError) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(state.message ?? ""),
+        ));
+      } else if (state is LandingSearchError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message ?? ""),
         ));
@@ -91,6 +95,17 @@ class _MoviesScreenState extends State<MoviesScreen> {
             onDrawerPressed: () {
               _isDrawerOpen = false;
               setState(() {});
+            },
+            onSearchPressed: (String query) {
+              _bloc.add(
+                LandingSearchEvent(
+                  queryParametersRequest: QueryParametersRequest(
+                    language: "en",
+                    page: 1,
+                    query: query,
+                  ),
+                ),
+              );
             },
           ),
           body: SingleChildScrollView(

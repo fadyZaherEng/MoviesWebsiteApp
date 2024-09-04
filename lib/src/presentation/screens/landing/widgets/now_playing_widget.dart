@@ -3,6 +3,7 @@ import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 import 'package:movies_website_apps/src/core/utils/constants.dart';
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:skeletons/skeletons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class NowPlayingWidget extends StatelessWidget {
   final bool isLoading;
@@ -42,15 +43,28 @@ class NowPlayingWidget extends StatelessWidget {
             : GestureDetector(
                 onTap: () {},
                 child: ListTile(
-                  leading: Image.network(
-                    "${Constants.imageBaseUrl}${nowPlayingMovies[index].posterPath}",
+                  leading:CachedNetworkImage(
+                   imageUrl:  "${Constants.imageBaseUrl}${nowPlayingMovies[index].posterPath}",
                     width: 80,
                     height: 120,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => const Icon(
-                      Icons.error,
-                      color: ColorSchemes.red,
+                    errorWidget: (context, error, stackTrace) => SkeletonLine(
+                      style: SkeletonLineStyle(
+                        width: 80,
+                        height: 120,
+                        borderRadius: BorderRadius.circular(8)
+                      )
                     ),
+                    matchTextDirection: true,
+                    placeholder: (context, _) {
+                      return SkeletonLine(
+                        style: SkeletonLineStyle(
+                          width: 80,
+                          height: 120,
+                          borderRadius: BorderRadius.circular(8)
+                        )
+                      );
+                    }
                   ),
                   title: Text(
                     nowPlayingMovies[index].title,
