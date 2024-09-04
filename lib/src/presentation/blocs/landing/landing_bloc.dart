@@ -26,6 +26,7 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
     on<LandingPlayNowEvent>(_onLandingPlayNowEvent);
     on<LandingTopRatedEvent>(_onLandingTopRatedEvent);
     on<LandingPopularEvent>(_onLandingPopularEvent);
+    on<LandingUpcomingEvent>(_onLandingUpcomingEvent);
   }
 
   FutureOr<void> _onLandingPlayNowEvent(
@@ -61,6 +62,18 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
       emit(LandingPopularSuccess(movies: result.data ?? []));
     } else {
       emit(LandingPopularError(message: result.message ?? "Failed"));
+    }
+  }
+
+  FutureOr<void> _onLandingUpcomingEvent(
+      LandingUpcomingEvent event, Emitter<LandingState> emit) async {
+    emit(LandingUpcomingLoading());
+    DataState<List<Movie>> result =
+        await _getPopularMoviesUseCase.getPopular(event.queryParametersRequest);
+    if (result is DataSuccess) {
+      emit(LandingUpcomingSuccess(movies: result.data ?? []));
+    } else {
+      emit(LandingUpcomingError(message: result.message ?? "Failed"));
     }
   }
 }

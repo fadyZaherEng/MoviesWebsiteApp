@@ -26,3 +26,10 @@ class LandingPopularEvent extends LandingEvent {
     required this.queryParametersRequest,
   });
 }
+class LandingUpcomingEvent extends LandingEvent {
+  final QueryParametersRequest queryParametersRequest;
+
+  LandingUpcomingEvent({
+    required this.queryParametersRequest,
+  });
+}

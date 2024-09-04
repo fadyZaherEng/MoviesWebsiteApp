@@ -43,3 +43,16 @@ final class LandingPopularError extends LandingState {
   final String message;
   LandingPopularError({required this.message});
 }
+//upcoming
+
+final class LandingUpcomingLoading extends LandingState {}
+
+final class LandingUpcomingSuccess extends LandingState {
+  final List<Movie> movies;
+  LandingUpcomingSuccess({required this.movies});
+}
+
+final class LandingUpcomingError extends LandingState {
+  final String message;
+  LandingUpcomingError({required this.message});
+}

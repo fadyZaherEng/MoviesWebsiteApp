@@ -144,7 +144,7 @@ class _MyAppState extends State<MyApp> {
                       themeMode: ThemeMode.light,
                       supportedLocales: S.delegate.supportedLocales,
                       onGenerateRoute: RoutesManager.getRoute,
-                      initialRoute: Routes.splash,
+                      initialRoute: Routes.landingWeb,
                       localizationsDelegates: const [
                         S.delegate,
                         GlobalMaterialLocalizations.delegate,

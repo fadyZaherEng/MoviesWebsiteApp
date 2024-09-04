@@ -7,7 +7,7 @@ import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:movies_website_apps/src/presentation/blocs/landing/landing_bloc.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/carousel_slider.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/now_playing_widget.dart';
-import 'package:movies_website_apps/src/presentation/screens/landing/widgets/popular_movies_widget.dart';
+import 'package:movies_website_apps/src/presentation/widgets/popular_movies_widget.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/footer.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_drawer.dart';
@@ -27,6 +27,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
   List<Movie> _moviesPlayNow = [];
   List<Movie> _moviesTopRated = [];
   List<Movie> _moviesPopular = [];
+  List<Movie> _moviesUpComing = [];
 
   @override
   void initState() {
@@ -39,12 +40,16 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
     _bloc.add(LandingPopularEvent(
         queryParametersRequest:
             QueryParametersRequest(language: "en", page: 1)));
+    _bloc.add(LandingUpcomingEvent(
+        queryParametersRequest:
+            QueryParametersRequest(language: "en", page: 1)));
     super.initState();
   }
 
   @override
   Widget baseBuild(BuildContext context) {
-    return BlocConsumer<LandingBloc, LandingState>(listener: (context, state) {
+    return BlocConsumer<LandingBloc, LandingState>(
+        listener: (context, state) {
       if (state is LandingPlayNowSuccess) {
         _moviesPlayNow = state.movies;
       } else if (state is LandingTopRatedSuccess) {
@@ -53,6 +58,8 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message ?? ""),
         ));
+      } else if (state is LandingUpcomingSuccess) {
+        _moviesUpComing = state.movies;
       } else if (state is LandingPopularSuccess) {
         _moviesPopular = state.movies;
       } else if (state is LandingTopRatedError) {
@@ -60,6 +67,10 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
           content: Text(state.message ?? ""),
         ));
       } else if (state is LandingPopularError) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(state.message ?? ""),
+        ));
+      } else if (state is LandingUpcomingError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message ?? ""),
         ));
@@ -115,7 +126,9 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                             children: [
                               Row(
                                 children: [
-                                  const SizedBox(width: 30,),
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
                                   Text(
                                     "Now Playing",
                                     style: Theme.of(context)
@@ -152,12 +165,14 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                       child: LayoutBuilder(
                         builder:
                             (BuildContext context, BoxConstraints constraints) {
-                          double gridHeight =
-                           state is LandingPopularLoading ?   (constraints.maxWidth / 5) * 1.25 * 3:
-                           (constraints.maxWidth / 5) * 1.25 * (_moviesPopular.length / 4);
+                          double gridHeight = state is LandingPopularLoading
+                              ? (constraints.maxWidth / 5) * 1.25 * 3
+                              : (constraints.maxWidth / 5) *
+                                  1.25 *
+                                  (_moviesPopular.length / 4);
                           return SizedBox(
                             height: gridHeight,
-                            child:  PopularMoviesWidget(
+                            child: PopularMoviesWidget(
                               isLoading: state is LandingPopularLoading,
                               popularMovies: _moviesPopular,
                             ),

@@ -11,4 +11,7 @@ abstract class LandingRepository {
 
   Future<DataState<List<Movie>>> getPopular(
       QueryParametersRequest queryParametersRequest);
+
+  Future<DataState<List<Movie>>> getUpcoming(
+      QueryParametersRequest queryParametersRequest);
 }
