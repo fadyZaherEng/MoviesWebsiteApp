@@ -100,7 +100,7 @@ class _State extends State<CustomAppBarWidget> {
                     ),
                     suffixIcon: InkWell(
                       onTap: () {
-                        context.go('/search/');
+                        // context.go('/search/');
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/main.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/landing_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/movies/movies_screen.dart';
+import 'package:movies_website_apps/src/presentation/screens/search/search_result_screen.dart';
 
 class Routes {
   static const String landing = "/landing";
@@ -10,6 +11,7 @@ class Routes {
   //web
   static const String landingWeb = "/";
   static const String movies = "/movies";
+  static const String search = "/search";
 }
 
 class RoutesManager {
@@ -27,7 +29,6 @@ class RoutesManager {
         return _materialRoute(const MoviesScreen());
       default:
         return _materialRoute(const LandingScreen());
-
     }
   }
 
@@ -62,15 +63,13 @@ final GoRouter webRouter = GoRouter(
     GoRoute(
         path: Routes.movies,
         name: Routes.movies,
-        builder: (context, state) => const MoviesScreen())
-    // GoRoute(
-    //     path: Routes.webUnits,
-    //     name: Routes.webUnits,
-    //     builder: (context, state) => const UnitsWebScreen()),
-    // GoRoute(
-    //     path: "${Routes.unitDetailsWebById}/:id",
-    //     builder: (context, state) => UnitDetailsWebScreen(
-    //         unitId: int.parse(state.pathParameters["id"] ?? "0"))),
+        builder: (context, state) => const MoviesScreen()),
+    GoRoute(
+      path: "${Routes.search}/:query",
+      builder: (context, state) => SearchResultScreen(
+        query: state.pathParameters["query"] ?? "",
+      ),
+    ),
     // GoRoute(
     //     path: "${Routes.unitDetailsWeb}/:id",
     //     builder: (context, state) => UnitDetailsWebScreen(
