@@ -23,9 +23,9 @@ class CustomDrawer extends StatelessWidget {
               children: [
                 const Spacer(),
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.close,
-                    color: ColorSchemes.primary,
+                    color: Color(0xFFE2B616),
                   ),
                   onPressed: () {
                     onTap();
@@ -69,7 +69,7 @@ class CustomDrawer extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge
-                            ?.copyWith(color: ColorSchemes.white),
+                            ?.copyWith(color: const Color(0xFFE2B616)),
                       ),
                     ),
                   ),
@@ -87,7 +87,7 @@ class CustomDrawer extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge
-                            ?.copyWith(color: ColorSchemes.white),
+                            ?.copyWith(color: const Color(0xFFE2B616)),
                       ),
                     ),
                   ),
