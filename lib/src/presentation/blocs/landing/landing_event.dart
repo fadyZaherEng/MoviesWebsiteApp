@@ -10,3 +10,19 @@ class LandingPlayNowEvent extends LandingEvent {
     required this.queryParametersRequest,
   });
 }
+
+class LandingTopRatedEvent extends LandingEvent {
+  final QueryParametersRequest queryParametersRequest;
+
+  LandingTopRatedEvent({
+    required this.queryParametersRequest,
+  });
+}
+
+class LandingPopularEvent extends LandingEvent {
+  final QueryParametersRequest queryParametersRequest;
+
+  LandingPopularEvent({
+    required this.queryParametersRequest,
+  });
+}

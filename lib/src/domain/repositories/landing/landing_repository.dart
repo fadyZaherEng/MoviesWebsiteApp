@@ -5,4 +5,10 @@ import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 abstract class LandingRepository {
   Future<DataState<List<Movie>>> getPlayNow(
       QueryParametersRequest queryParametersRequest);
+
+  Future<DataState<List<Movie>>> getTopRated(
+      QueryParametersRequest queryParametersRequest);
+
+  Future<DataState<List<Movie>>> getPopular(
+      QueryParametersRequest queryParametersRequest);
 }

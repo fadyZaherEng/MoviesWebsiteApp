@@ -17,4 +17,16 @@ abstract class LandingApiServices {
     @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
   );
+
+  @GET(APIKeys.topRated)
+  Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getTopRated(
+    @Body() TMDBRequest request,
+    @Queries() QueryParametersRequest queryParametersRequest,
+  );
+
+  @GET(APIKeys.popular)
+  Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getPopular(
+    @Body() TMDBRequest request,
+    @Queries() QueryParametersRequest queryParametersRequest,
+  );
 }

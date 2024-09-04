@@ -23,9 +23,9 @@ class CustomDrawer extends StatelessWidget {
               children: [
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.close,
-                    color: ColorSchemes.white,
+                    color: ColorSchemes.primary,
                   ),
                   onPressed: () {
                         onTap();

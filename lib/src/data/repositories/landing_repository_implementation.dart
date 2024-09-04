@@ -37,4 +37,52 @@ class LandingRepositoryImplementation implements LandingRepository {
       );
     }
   }
+
+  @override
+  Future<DataState<List<Movie>>> getTopRated(
+      QueryParametersRequest queryParametersRequest) async {
+    try {
+      TMDBRequest request = await TMDBRequest().createRequest(null);
+      final httpResponse = await _landingApiServices.getTopRated(
+          request, queryParametersRequest);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          data: (httpResponse.data.result ?? []).mapToDomain(),
+          message: httpResponse.data.responseMessage ?? "",
+        );
+      }
+      return DataFailed(
+        message: httpResponse.data.responseMessage ?? "Failed",
+      );
+    } on DioException catch (e) {
+      return DataFailed(
+        error: e,
+        message: "bad Response",
+      );
+    }
+  }
+
+  @override
+  Future<DataState<List<Movie>>> getPopular(
+      QueryParametersRequest queryParametersRequest) async {
+    try {
+      TMDBRequest request = await TMDBRequest().createRequest(null);
+      final httpResponse =
+          await _landingApiServices.getPopular(request, queryParametersRequest);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          data: (httpResponse.data.result ?? []).mapToDomain(),
+          message: httpResponse.data.responseMessage ?? "",
+        );
+      }
+      return DataFailed(
+        message: httpResponse.data.responseMessage ?? "Failed",
+      );
+    } on DioException catch (e) {
+      return DataFailed(
+        error: e,
+        message: "bad Response",
+      );
+    }
+  }
 }
