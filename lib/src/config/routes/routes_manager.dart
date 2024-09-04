@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/main.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/landing_screen.dart';
+import 'package:movies_website_apps/src/presentation/screens/movies/movies_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/splash/splash_screen.dart';
 
 class Routes {
@@ -11,7 +12,7 @@ class Routes {
 
   //web
   static const String landingWeb = "/TMDBMovies";
-  static const String movies="/movies";
+  static const String movies = "/movies";
 }
 
 class RoutesManager {
@@ -23,11 +24,15 @@ class RoutesManager {
       //   return _materialRoute(const SplashScreen());
       case Routes.landing:
         return _materialRoute(const LandingScreen());
+      case Routes.landingWeb:
+        return _materialRoute(const LandingScreen());
       case Routes.splash:
         return _materialRoute(const SplashScreen());
+      case Routes.movies:
+        return _materialRoute(const MoviesScreen());
       default:
         return kIsWeb
-            ? _materialRoute(const LandingScreen())
+            ? _materialRoute(const SplashScreen())
             : _materialRoute(const SplashScreen());
     }
   }
@@ -57,13 +62,17 @@ final GoRouter webRouter = GoRouter(
   observers: [routeObserver],
   routes: [
     GoRoute(
+        path: Routes.splash,
+        name: Routes.splash,
+        builder: (context, state) => const SplashScreen()),
+    GoRoute(
         path: Routes.landingWeb,
         name: Routes.landingWeb,
         builder: (context, state) => const LandingScreen()),
     GoRoute(
-        path: Routes.splash,
-        name: Routes.splash,
-        builder: (context, state) => const SplashScreen()),
+        path: Routes.movies,
+        name: Routes.movies,
+        builder: (context, state) => const MoviesScreen())
     // GoRoute(
     //     path: Routes.webUnits,
     //     name: Routes.webUnits,

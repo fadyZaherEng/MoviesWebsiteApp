@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/generated/l10n.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
+import 'package:movies_website_apps/src/presentation/screens/landing/landing_screen.dart';
+import 'package:movies_website_apps/src/presentation/screens/movies/movies_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   final void Function() onTap;
@@ -59,6 +61,10 @@ class CustomDrawer extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       context.go(Routes.landingWeb);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LandingScreen()));
                       onTap();
                       Scaffold.of(context).closeDrawer();
                     },
@@ -77,6 +83,10 @@ class CustomDrawer extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       context.go(Routes.movies);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MoviesScreen()));
                       onTap();
                       Scaffold.of(context).closeDrawer();
                     },
