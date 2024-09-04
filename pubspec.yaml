@@ -91,6 +91,7 @@ dependencies:
   url_strategy:
   go_router:
   flutter_spinkit:
+  animate_do:
 
 dev_dependencies:
   flutter_test:
