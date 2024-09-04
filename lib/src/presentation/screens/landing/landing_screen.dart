@@ -153,7 +153,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      "Explore Popular Movies",
+                      "Popular Movies",
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
