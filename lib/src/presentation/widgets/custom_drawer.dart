@@ -23,13 +23,13 @@ class CustomDrawer extends StatelessWidget {
               children: [
                 const Spacer(),
                 IconButton(
-                  icon:  Icon(
+                  icon: Icon(
                     Icons.close,
                     color: ColorSchemes.primary,
                   ),
                   onPressed: () {
-                        onTap();
-                        Scaffold.of(context).closeDrawer();
+                    onTap();
+                    Scaffold.of(context).closeDrawer();
                   },
                 ),
               ],
