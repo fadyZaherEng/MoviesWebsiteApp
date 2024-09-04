@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:movies_website_apps/src/domain/entities/landing/remote_movies.dart';
+import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 
 part 'remote_movies.g.dart';
 
@@ -52,8 +52,8 @@ class RemoteMovies {
 }
 
 extension RemoteMoviesExtension on RemoteMovies {
-  Movies mapToDomain() {
-    return Movies(
+  Movie mapToDomain() {
+    return Movie(
         adult: adult ?? false,
         backdropPath: backdropPath ?? "",
         genreIds: genreIds ?? [],
@@ -72,7 +72,7 @@ extension RemoteMoviesExtension on RemoteMovies {
 }
 
 extension RemoteMoviesListExtension on List<RemoteMovies> {
-  List<Movies> mapToDomain() {
+  List<Movie> mapToDomain() {
     return map((e) => e.mapToDomain()).toList();
   }
 }

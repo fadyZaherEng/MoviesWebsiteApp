@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/main.dart';
-import 'package:movies_website_apps/src/presentation/screens/landing_app/landing_screen.dart';
+import 'package:movies_website_apps/src/presentation/screens/landing/landing_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/splash/splash_screen.dart';
 
 class Routes {

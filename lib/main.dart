@@ -15,6 +15,7 @@ import 'package:movies_website_apps/src/core/utils/firebase_notification_service
 import 'package:movies_website_apps/src/core/utils/hms_notification_service.dart';
 import 'package:movies_website_apps/src/core/utils/network_connectivity.dart';
 import 'package:movies_website_apps/src/di/injector.dart';
+import 'package:movies_website_apps/src/presentation/blocs/landing/landing_bloc.dart';
 import 'package:movies_website_apps/src/presentation/blocs/main/main_bloc.dart';
 import 'package:movies_website_apps/src/presentation/widgets/restart_widget.dart';
 import 'package:flutter_portal/flutter_portal.dart';
@@ -24,6 +25,9 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
+  ChuckerFlutter.showNotification=true;
+  ChuckerFlutter.showOnRelease=true;
+
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
   if (!kIsWeb) {
@@ -79,6 +83,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<MainCubit>(create: (context) => injector()),
+        BlocProvider<LandingBloc>(create: (context) => injector()),
       ],
       child: BlocBuilder<MainCubit, Locale>(
         buildWhen: (previousState, currentState) {
