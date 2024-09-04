@@ -91,7 +91,7 @@ class _PopularMoviesWidgetState extends State<PopularMoviesWidget> {
                                       style: SkeletonLineStyle(
                                           width: double.infinity,
                                           height: 200,
-                                        borderRadius: BorderRadius.only(
+                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),
                                         ),
