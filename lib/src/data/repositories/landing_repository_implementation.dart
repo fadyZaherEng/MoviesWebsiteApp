@@ -133,4 +133,53 @@ class LandingRepositoryImplementation implements LandingRepository {
       );
     }
   }
+
+  @override
+  Future<DataState<Movie>> getMovieDetailsById(
+      QueryParametersRequest queryParametersRequest) async {
+    try {
+      TMDBRequest request = await TMDBRequest().createRequest(null);
+      final httpResponse = await _landingApiServices.getMovieDetailsById(
+          request, queryParametersRequest);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          data:
+              (httpResponse.data.result ?? const RemoteMovies()).mapToDomain(),
+          message: httpResponse.data.responseMessage ?? "",
+        );
+      }
+      return DataFailed(
+        message: httpResponse.data.responseMessage ?? "Failed",
+      );
+    } on DioException catch (e) {
+      return DataFailed(
+        error: e,
+        message: "bad Response",
+      );
+    }
+  }
+
+  @override
+  Future<DataState<List<Movie>>> getSimilarById(
+      QueryParametersRequest queryParametersRequest) async {
+    try {
+      TMDBRequest request = await TMDBRequest().createRequest(null);
+      final httpResponse = await _landingApiServices.getSimilarById(
+          request, queryParametersRequest);
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(
+          data: (httpResponse.data.result ?? []).mapToDomain(),
+          message: httpResponse.data.responseMessage ?? "",
+        );
+      }
+      return DataFailed(
+        message: httpResponse.data.responseMessage ?? "Failed",
+      );
+    } on DioException catch (e) {
+      return DataFailed(
+        error: e,
+        message: "bad Response",
+      );
+      }
+  }
 }

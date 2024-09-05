@@ -223,6 +223,83 @@ class _LandingApiServices implements LandingApiServices {
     return httpResponse;
   }
 
+  @override
+  Future<HttpResponse<TMDBResponse<RemoteMovies>>> getMovieDetailsById(
+    TMDBRequest<dynamic> request,
+    QueryParametersRequest queryParametersRequest,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(queryParametersRequest.toJson());
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson((value) => value));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<TMDBResponse<RemoteMovies>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'movie/:movie_id',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TMDBResponse<RemoteMovies>.fromJson(
+      _result.data!,
+      (json) => RemoteMovies.fromJson(json as Map<String, dynamic>),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getSimilarById(
+    TMDBRequest<dynamic> request,
+    QueryParametersRequest queryParametersRequest,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(queryParametersRequest.toJson());
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson((value) => value));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'movie/:movie_id/similar',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TMDBResponse<List<RemoteMovies>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<RemoteMovies>(
+                  (i) => RemoteMovies.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

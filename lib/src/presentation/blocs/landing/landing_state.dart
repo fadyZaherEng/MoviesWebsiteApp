@@ -69,3 +69,29 @@ final class LandingSearchError extends LandingState {
   final String message;
   LandingSearchError({required this.message});
 }
+//get similarById
+
+final class LandingSimilarLoading extends LandingState {}
+
+final class LandingSimilarSuccess extends LandingState {
+  final List<Movie> movies;
+  LandingSimilarSuccess({required this.movies});
+}
+
+final class LandingSimilarError extends LandingState {
+  final String message;
+  LandingSimilarError({required this.message});
+}
+//get movie details
+
+final class LandingMovieDetailsLoading extends LandingState {}
+
+final class LandingMovieDetailsSuccess extends LandingState {
+  final Movie movie;
+  LandingMovieDetailsSuccess({required this.movie});
+}
+
+final class LandingMovieDetailsError extends LandingState {
+  final String message;
+  LandingMovieDetailsError({required this.message});
+}

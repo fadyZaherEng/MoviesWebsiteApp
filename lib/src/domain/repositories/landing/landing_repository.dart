@@ -17,4 +17,10 @@ abstract class LandingRepository {
 
   Future<DataState<List<Movie>>> searchMovies(
       QueryParametersRequest queryParametersRequest);
+
+  Future<DataState<Movie>> getMovieDetailsById(
+      QueryParametersRequest queryParametersRequest);
+
+  Future<DataState<List<Movie>>> getSimilarById(
+      QueryParametersRequest queryParametersRequest);
 }

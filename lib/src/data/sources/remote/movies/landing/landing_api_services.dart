@@ -32,13 +32,25 @@ abstract class LandingApiServices {
 
   @GET(APIKeys.upcoming)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getUpcoming(
-      @Body() TMDBRequest request,
-      @Queries() QueryParametersRequest queryParametersRequest,
-      );
+    @Body() TMDBRequest request,
+    @Queries() QueryParametersRequest queryParametersRequest,
+  );
+
   @GET(APIKeys.search)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> searchMovies(
-      @Body() TMDBRequest request,
-      @Queries() QueryParametersRequest queryParametersRequest,
-      );
+    @Body() TMDBRequest request,
+    @Queries() QueryParametersRequest queryParametersRequest,
+  );
 
+  @GET(APIKeys.details)
+  Future<HttpResponse<TMDBResponse<RemoteMovies>>> getMovieDetailsById(
+    @Body() TMDBRequest request,
+    @Queries() QueryParametersRequest queryParametersRequest,
+  );
+
+  @GET(APIKeys.similar)
+  Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getSimilarById(
+    @Body() TMDBRequest request,
+    @Queries() QueryParametersRequest queryParametersRequest,
+  );
 }

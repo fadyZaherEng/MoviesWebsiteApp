@@ -1,7 +1,9 @@
 import 'package:movies_website_apps/src/di/data_layer_injector.dart';
 import 'package:movies_website_apps/src/domain/usecase/get_language_use_case.dart';
+import 'package:movies_website_apps/src/domain/usecase/landing/get_movie_by_id_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_play_now_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_pupolar_use_case.dart';
+import 'package:movies_website_apps/src/domain/usecase/landing/get_similar_by_id_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_top_rated_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_up_coming_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/search_movies_use_case.dart';
@@ -28,4 +30,10 @@ Future<void> initializeUseCaseDependencies() async {
 
   injector.registerFactory<SearchMoviesUseCase>(
       () => SearchMoviesUseCase(landingRepository: injector()));
+
+  injector.registerFactory<GetSimilarByIdUseCase>(
+      () => GetSimilarByIdUseCase(landingRepository: injector()));
+
+  injector.registerFactory<GetMovieByIdUseCase>(
+      () => GetMovieByIdUseCase(landingRepository: injector()));
 }

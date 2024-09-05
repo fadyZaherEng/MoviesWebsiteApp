@@ -40,3 +40,19 @@ class LandingSearchEvent extends LandingEvent {
     required this.queryParametersRequest,
   });
 }
+
+class LandingGetSimilarByIdEvent extends LandingEvent {
+  final QueryParametersRequest queryParametersRequest;
+
+  LandingGetSimilarByIdEvent({
+    required this.queryParametersRequest,
+  });
+}
+
+class LandingGetMovieByIdEvent extends LandingEvent {
+  final QueryParametersRequest queryParametersRequest;
+
+  LandingGetMovieByIdEvent({
+    required this.queryParametersRequest,
+  });
+}

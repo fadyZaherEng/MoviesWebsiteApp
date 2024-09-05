@@ -5,8 +5,10 @@ import 'package:meta/meta.dart';
 import 'package:movies_website_apps/src/core/resources/data_state.dart';
 import 'package:movies_website_apps/src/data/sources/remote/movies/landing/request/query_paramters_request.dart';
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
+import 'package:movies_website_apps/src/domain/usecase/landing/get_movie_by_id_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_play_now_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_pupolar_use_case.dart';
+import 'package:movies_website_apps/src/domain/usecase/landing/get_similar_by_id_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_top_rated_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/get_up_coming_use_case.dart';
 import 'package:movies_website_apps/src/domain/usecase/landing/search_movies_use_case.dart';
@@ -21,6 +23,8 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
   final GetPopularUseCase _getPopularMoviesUseCase;
   final GetUpComingUseCase _getUpcomingMoviesUseCase;
   final SearchMoviesUseCase _searchMoviesUseCase;
+  final GetMovieByIdUseCase _getMovieByIdUseCase;
+  final GetSimilarByIdUseCase _getSimilarByIdUseCase;
 
   LandingBloc(
     this._getPlayNowUseCase,
@@ -28,12 +32,16 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
     this._getPopularMoviesUseCase,
     this._getUpcomingMoviesUseCase,
     this._searchMoviesUseCase,
+    this._getMovieByIdUseCase,
+    this._getSimilarByIdUseCase,
   ) : super(LandingInitial()) {
     on<LandingPlayNowEvent>(_onLandingPlayNowEvent);
     on<LandingTopRatedEvent>(_onLandingTopRatedEvent);
     on<LandingPopularEvent>(_onLandingPopularEvent);
     on<LandingUpcomingEvent>(_onLandingUpcomingEvent);
     on<LandingSearchEvent>(_onLandingSearchEvent);
+    on<LandingGetMovieByIdEvent>(_onLandingGetMovieByIdEvent);
+    on<LandingGetSimilarByIdEvent>(_onLandingGetSimilarByIdEvent);
   }
 
   FutureOr<void> _onLandingPlayNowEvent(
@@ -93,6 +101,30 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
       emit(LandingSearchSuccess(movies: result.data ?? []));
     } else {
       emit(LandingSearchError(message: result.message ?? "Failed"));
+    }
+  }
+
+  FutureOr<void> _onLandingGetMovieByIdEvent(
+      LandingGetMovieByIdEvent event, Emitter<LandingState> emit) async {
+    emit(LandingMovieDetailsLoading());
+    DataState<Movie> result =
+        await _getMovieByIdUseCase.getMovieById(event.queryParametersRequest);
+    if (result is DataSuccess) {
+      emit(LandingMovieDetailsSuccess(movie: result.data ?? const Movie()));
+    } else {
+      emit(LandingMovieDetailsError(message: result.message ?? "Failed"));
+    }
+  }
+
+  FutureOr<void> _onLandingGetSimilarByIdEvent(
+      LandingGetSimilarByIdEvent event, Emitter<LandingState> emit) async {
+    emit(LandingSimilarLoading());
+    DataState<List<Movie>> result = await _getSimilarByIdUseCase
+        .getSimilarById(event.queryParametersRequest);
+    if (result is DataSuccess) {
+      emit(LandingSimilarSuccess(movies: result.data ?? []));
+    } else {
+      emit(LandingSimilarError(message: result.message ?? "Failed"));
     }
   }
 }
