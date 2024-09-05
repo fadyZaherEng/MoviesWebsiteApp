@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -114,106 +115,112 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                 );
               },
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 10),
-                    Text(
-                      "Top Rated Movies",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: ColorSchemes.white),
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: CarouselSliderWidget(
-                              isLoading: state is LandingTopRatedLoading,
-                              topRatedMovies: _moviesTopRated,
-                              onSliderTap: (int movieId) {
-                                context.go("${Routes.movie}/$movieId");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            MovieScreen(movieId: movieId)));
-                              }),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+            body: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 10),
+                          Text(
+                            "Top Rated Movies",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(color: ColorSchemes.white),
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
-                                  Text(
-                                    "Now Playing",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(color: ColorSchemes.white),
-                                  ),
-                                ],
+                              Expanded(
+                                flex: 2,
+                                child: CarouselSliderWidget(
+                                    isLoading: state is LandingTopRatedLoading,
+                                    topRatedMovies: _moviesTopRated,
+                                    onSliderTap: (int movieId) {
+                                      context.go("${Routes.movie}/$movieId");
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MovieScreen(movieId: movieId)));
+                                    }),
                               ),
-                              const SizedBox(height: 15),
-                              SizedBox(
-                                height: 450,
-                                child: NowPlayingWidget(
-                                  isLoading: state is LandingPlayNowLoading,
-                                  nowPlayingMovies: _moviesPlayNow,
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 30,
+                                        ),
+                                        Text(
+                                          "Now Playing",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(color: ColorSchemes.white),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 15),
+                                    SizedBox(
+                                      height: 450,
+                                      child: NowPlayingWidget(
+                                        isLoading: state is LandingPlayNowLoading,
+                                        nowPlayingMovies: _moviesPlayNow,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      "Popular Movies",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          ?.copyWith(color: ColorSchemes.white),
-                    ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: LayoutBuilder(
-                        builder:
-                            (BuildContext context, BoxConstraints constraints) {
-                          double gridHeight = state is LandingPopularLoading
-                              ? (constraints.maxWidth / 5) * 1.25 * 3
-                              : (constraints.maxWidth / 5) *
-                                  1.25 *
-                                  (_moviesPopular.length / 6);
-                          return SizedBox(
-                            height: gridHeight,
-                            child: PopularMoviesWidget(
-                              isLoading: state is LandingPopularLoading,
-                              popularMovies: _moviesPopular,
+                          const SizedBox(height: 20),
+                          Text(
+                            "Popular Movies",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.copyWith(color: ColorSchemes.white),
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: LayoutBuilder(
+                              builder:
+                                  (BuildContext context, BoxConstraints constraints) {
+                                double gridHeight = state is LandingPopularLoading
+                                    ? (constraints.maxWidth / 5) * 1.25 * 3
+                                    : (constraints.maxWidth / 5) *
+                                        1.25 *
+                                        (_moviesPopular.length / 6);
+                                return SizedBox(
+                                  height: gridHeight,
+                                  child: PopularMoviesWidget(
+                                    isLoading: state is LandingPopularLoading,
+                                    popularMovies: _moviesPopular,
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    const FooterWidget(),
-                    const SizedBox(height: 20),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                const FooterWidget(),
+                const SizedBox(height: 15),
+              ],
             ),
           );
         },

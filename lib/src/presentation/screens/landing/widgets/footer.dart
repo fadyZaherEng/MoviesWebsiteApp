@@ -18,7 +18,7 @@ class FooterWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 8,
+            height: 4,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +50,7 @@ class FooterWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 8,
+            height: 4,
           ),
           Wrap(
             spacing: 16,
