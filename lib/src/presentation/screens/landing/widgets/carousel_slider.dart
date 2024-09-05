@@ -63,8 +63,7 @@ class CarouselSliderWidget extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.network(
-                                "${Constants.imageBaseUrl}${movie.posterPath}" ??
-                                    "",
+                                "${Constants.imageBaseUrl}${movie.posterPath}" ,
                                 fit: BoxFit.fill,
                               ),
                             ),

@@ -27,8 +27,8 @@ class MovieScreen extends StatefulWidget {
 class _MovieScreenState extends State<MovieScreen> {
   bool _isDrawerOpen = false;
   List<Movie> _similarMovies = [];
-  Movie? _currentMovie;
-  final TextEditingController searchTextController=TextEditingController();
+  Movie _currentMovie = const Movie();
+  final TextEditingController searchTextController = TextEditingController();
 
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
 
@@ -102,7 +102,7 @@ class _MovieScreenState extends State<MovieScreen> {
                       children: [
                         CachedNetworkImage(
                             imageUrl:
-                                '${Constants.originalImageBaseUrl}${_currentMovie?.backdropPath}',
+                                '${Constants.originalImageBaseUrl}${_currentMovie.backdropPath}',
                             width: double.infinity,
                             height: 600,
                             fit: BoxFit.cover,
@@ -147,169 +147,158 @@ class _MovieScreenState extends State<MovieScreen> {
                       left: 10,
                       right: 0,
                       bottom: 150,
-                      child: Column(
+                      child: Row(
                         children: [
-                          Row(
+                          Stack(
                             children: [
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(8),
-                                      topRight: Radius.circular(8),
-                                      bottomLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8),
-                                    ),
-                                    child: CachedNetworkImage(
-                                        imageUrl:
-                                            '${Constants.imageBaseUrl}${_currentMovie?.posterPath}',
-                                        width: 150,
-                                        height: 230,
-                                        fit: BoxFit.cover,
-                                        errorWidget: (context, error,
-                                                stackTrace) =>
-                                            const SkeletonLine(
-                                                style: SkeletonLineStyle(
-                                              width: 150,
-                                              height: 230,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(8),
-                                                topRight: Radius.circular(8),
-                                                bottomLeft: Radius.circular(8),
-                                                bottomRight: Radius.circular(8),
-                                              ),
-                                            )),
-                                        matchTextDirection: true,
-                                        placeholder: (context, _) {
-                                          return const SkeletonLine(
-                                              style: SkeletonLineStyle(
-                                            width: 150,
-                                            height: 230,
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(8),
-                                              topRight: Radius.circular(8),
-                                              bottomLeft: Radius.circular(8),
-                                              bottomRight: Radius.circular(8),
-                                            ),
-                                          ));
-                                        }),
-                                  ),
-                                  Container(
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                ),
+                                child: CachedNetworkImage(
+                                    imageUrl:
+                                        '${Constants.imageBaseUrl}${_currentMovie.posterPath}',
                                     width: 150,
                                     height: 230,
-                                    decoration: const BoxDecoration(
+                                    fit: BoxFit.cover,
+                                    errorWidget: (context, error, stackTrace) =>
+                                        const SkeletonLine(
+                                            style: SkeletonLineStyle(
+                                          width: 150,
+                                          height: 230,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8),
+                                            topRight: Radius.circular(8),
+                                            bottomLeft: Radius.circular(8),
+                                            bottomRight: Radius.circular(8),
+                                          ),
+                                        )),
+                                    matchTextDirection: true,
+                                    placeholder: (context, _) {
+                                      return const SkeletonLine(
+                                          style: SkeletonLineStyle(
+                                        width: 150,
+                                        height: 230,
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),
                                           bottomLeft: Radius.circular(8),
                                           bottomRight: Radius.circular(8),
                                         ),
-                                        gradient: LinearGradient(
-                                          begin: AlignmentDirectional.topCenter,
-                                          end:
-                                              AlignmentDirectional.bottomCenter,
-                                          colors: [
-                                            Colors.transparent,
-                                            Colors.black,
-                                          ],
-                                        )),
-                                  )
-                                ],
+                                      ));
+                                    }),
                               ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                  child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      _currentMovie?.originalTitle ?? "",
-                                      style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                              Container(
+                                width: 150,
+                                height: 230,
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      topRight: Radius.circular(8),
+                                      bottomLeft: Radius.circular(8),
+                                      bottomRight: Radius.circular(8),
                                     ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      _currentMovie?.releaseDate ?? "",
-                                      style: const TextStyle(
-                                          fontSize: 20, color: Colors.white),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      'Popularity: ${_currentMovie?.popularity.toString()}',
-                                      style: const TextStyle(
-                                          fontSize: 16, color: Colors.white),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      _currentMovie?.overview ?? "",
-                                      style: const TextStyle(
-                                          fontSize: 16, color: Colors.white),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8),
-                                      child: Text(
-                                        'Original Language: ${_currentMovie?.originalLanguage ?? ""}',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontStyle: FontStyle.italic,
-                                            color: Colors.grey),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ))
+                                    gradient: LinearGradient(
+                                      begin: AlignmentDirectional.topCenter,
+                                      end: AlignmentDirectional.bottomCenter,
+                                      colors: [
+                                        Colors.transparent,
+                                        Colors.black,
+                                      ],
+                                    )),
+                              )
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 25),
-                            child: Text(
-                              'Similar Movies',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
+                          const SizedBox(
+                            width: 20,
                           ),
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: LayoutBuilder(
-                              builder: (BuildContext context,
-                                  BoxConstraints constraints) {
-                                double gridHeight =
-                                    state is LandingPopularLoading
-                                        ? (constraints.maxWidth / 5) * 1.25 * 3
-                                        : (constraints.maxWidth / 5) *
-                                            1.25 *
-                                            (_similarMovies.length / 6);
-                                return SizedBox(
-                                  height: gridHeight,
-                                  child: PopularMoviesWidget(
-                                    isLoading: state is LandingPopularLoading,
-                                    popularMovies: _similarMovies,
+                          Expanded(
+                              child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _currentMovie.originalTitle ?? "",
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  _currentMovie.releaseDate ?? "",
+                                  style: const TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Popularity: ${_currentMovie.popularity.toString()}',
+                                  style: const TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  _currentMovie.overview ?? "",
+                                  style: const TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8),
+                                  child: Text(
+                                    'Original Language: ${_currentMovie.originalLanguage ?? ""}',
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.grey),
                                   ),
-                                );
-                              },
+                                )
+                              ],
                             ),
-                          ),
+                          ))
                         ],
                       ),
                     )
                   ],
                 ),
               ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                child: Text(
+                  'Similar Movies',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    double gridHeight = state is LandingPopularLoading
+                        ? (constraints.maxWidth / 5) * 1.25 * 3
+                        : (constraints.maxWidth / 5) *
+                            1.25 *
+                            (_similarMovies.length / 6);
+                    return SizedBox(
+                      height: gridHeight,
+                      child: PopularMoviesWidget(
+                        isLoading: state is LandingPopularLoading,
+                        popularMovies: _similarMovies,
+                      ),
+                    );
+                  },
+                ),
+              ),
               const SizedBox(height: 20),
               const FooterWidget(),
-              const SizedBox(height: 20),
             ],
           ),
         ),

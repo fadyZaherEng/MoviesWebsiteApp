@@ -24,27 +24,29 @@ class FooterWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+
+                },
                 icon: const Icon(Icons.facebook),
-                // color: Colors.grey[400],
+                color: Colors.white,
                 tooltip: 'Facebook',
               ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.link),
-                // color: Colors.grey[400],
+                color: Colors.white,
                 tooltip: 'Twitter',
               ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.image),
-                // color: Colors.grey[400],
+                color: Colors.white,
                 tooltip: 'Instagram',
               ),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.video_library),
-                // color: Colors.grey[400],
+                color: Colors.white,
                 tooltip: 'Youtube',
               )
             ],

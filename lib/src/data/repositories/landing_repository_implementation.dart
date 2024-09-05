@@ -140,7 +140,10 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getMovieDetailsById(
-          request, queryParametersRequest, movieId);
+        request,
+        queryParametersRequest,
+        movieId,
+      );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data:
@@ -165,7 +168,7 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getSimilarById(
-          request, queryParametersRequest,  movieId);
+          request, queryParametersRequest, movieId);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
