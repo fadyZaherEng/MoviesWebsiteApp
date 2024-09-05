@@ -11,7 +11,7 @@ class GetMovieByIdUseCase {
   });
 
   Future<DataState<Movie>> getMovieById(
-      QueryParametersRequest queryParametersRequest) async {
-    return await landingRepository.getMovieDetailsById(queryParametersRequest);
+      QueryParametersRequest queryParametersRequest, int movieId) async {
+    return await landingRepository.getMovieDetailsById(queryParametersRequest,  movieId);
   }
 }

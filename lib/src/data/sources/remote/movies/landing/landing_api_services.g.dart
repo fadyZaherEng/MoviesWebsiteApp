@@ -227,6 +227,7 @@ class _LandingApiServices implements LandingApiServices {
   Future<HttpResponse<TMDBResponse<RemoteMovies>>> getMovieDetailsById(
     TMDBRequest<dynamic> request,
     QueryParametersRequest queryParametersRequest,
+    int movieId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -242,7 +243,7 @@ class _LandingApiServices implements LandingApiServices {
     )
             .compose(
               _dio.options,
-              'movie/:movie_id',
+              'movie/${movieId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -263,6 +264,7 @@ class _LandingApiServices implements LandingApiServices {
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getSimilarById(
     TMDBRequest<dynamic> request,
     QueryParametersRequest queryParametersRequest,
+    int movieId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -278,7 +280,7 @@ class _LandingApiServices implements LandingApiServices {
     )
             .compose(
               _dio.options,
-              'movie/:movie_id/similar',
+              'movie/${movieId}/similar',
               queryParameters: queryParameters,
               data: _data,
             )

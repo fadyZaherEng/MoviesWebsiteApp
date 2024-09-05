@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 import 'package:movies_website_apps/src/core/base/widget/base_stateful_widget.dart';
@@ -133,6 +134,9 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                           child: CarouselSliderWidget(
                             isLoading: state is LandingTopRatedLoading,
                             topRatedMovies: _moviesTopRated,
+                            onSliderTap:(int movieId){
+                              context.go("${Routes.movie}/$movieId");
+                            }
                           ),
                         ),
                         Expanded(

@@ -5,6 +5,6 @@ class APIKeys {
   static const String popular = "movie/popular";
   static const String upcoming = "movie/upcoming";
   static const String search = "search/movie";
-  static const String details = "movie/:movie_id";
-  static const String similar = "movie/:movie_id/similar";
+  static const String details = "movie/{movie_id}";
+  static const String similar = "movie/{movie_id}/similar";
 }

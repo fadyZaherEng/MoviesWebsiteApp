@@ -3,15 +3,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:movies_website_apps/src/core/utils/constants.dart';
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:skeletons/skeletons.dart';
-
 class CarouselSliderWidget extends StatelessWidget {
   final bool isLoading;
   final List<Movie> topRatedMovies;
+  final void Function(int) onSliderTap;
 
   const CarouselSliderWidget({
     super.key,
     required this.isLoading,
     required this.topRatedMovies,
+    required this.onSliderTap,
   });
 
   @override
@@ -25,11 +26,10 @@ class CarouselSliderWidget extends StatelessWidget {
                   child: Builder(
                     builder: (BuildContext context) {
                       return Container(
-                       decoration: const BoxDecoration(
-                          color: Colors.black54,
-                         borderRadius: BorderRadius.all(Radius.circular(8))
-                       )
-                      );
+                          decoration: const BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8))));
                     },
                   ),
                 );
@@ -41,28 +41,32 @@ class CarouselSliderWidget extends StatelessWidget {
                     child: Builder(
                       builder: (BuildContext context) {
                         return Container(
-                         decoration: const BoxDecoration(
-                            color: Colors.black54,
-                           borderRadius: BorderRadius.all(Radius.circular(8))
-                         )
-                        );
+                            decoration: const BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))));
                       },
                     ),
                   )
                 ]
               : topRatedMovies
                   .map(
-                    (movie) => Builder(
+                    (Movie movie) => Builder(
                       builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              "${Constants.imageBaseUrl}${movie.posterPath}" ??
-                                  "",
-                              fit: BoxFit.fill,
+                        return InkWell(
+                          onTap:(){
+                            onSliderTap(movie.id);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                "${Constants.imageBaseUrl}${movie.posterPath}" ??
+                                    "",
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                         );

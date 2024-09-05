@@ -107,8 +107,10 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
   FutureOr<void> _onLandingGetMovieByIdEvent(
       LandingGetMovieByIdEvent event, Emitter<LandingState> emit) async {
     emit(LandingMovieDetailsLoading());
-    DataState<Movie> result =
-        await _getMovieByIdUseCase.getMovieById(event.queryParametersRequest);
+    DataState<Movie> result = await _getMovieByIdUseCase.getMovieById(
+      event.queryParametersRequest,
+      event.movieId,
+    );
     if (result is DataSuccess) {
       emit(LandingMovieDetailsSuccess(movie: result.data ?? const Movie()));
     } else {
@@ -119,8 +121,10 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
   FutureOr<void> _onLandingGetSimilarByIdEvent(
       LandingGetSimilarByIdEvent event, Emitter<LandingState> emit) async {
     emit(LandingSimilarLoading());
-    DataState<List<Movie>> result = await _getSimilarByIdUseCase
-        .getSimilarById(event.queryParametersRequest);
+    DataState<List<Movie>> result = await _getSimilarByIdUseCase.getSimilarById(
+      event.queryParametersRequest,
+      event.movieId,
+    );
     if (result is DataSuccess) {
       emit(LandingSimilarSuccess(movies: result.data ?? []));
     } else {

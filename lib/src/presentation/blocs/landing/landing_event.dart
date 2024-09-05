@@ -43,16 +43,20 @@ class LandingSearchEvent extends LandingEvent {
 
 class LandingGetSimilarByIdEvent extends LandingEvent {
   final QueryParametersRequest queryParametersRequest;
+  final  int movieId;
 
   LandingGetSimilarByIdEvent({
     required this.queryParametersRequest,
+    required this.movieId,
   });
 }
 
 class LandingGetMovieByIdEvent extends LandingEvent {
   final QueryParametersRequest queryParametersRequest;
+  final  int movieId;
 
   LandingGetMovieByIdEvent({
     required this.queryParametersRequest,
+    required this.movieId,
   });
 }

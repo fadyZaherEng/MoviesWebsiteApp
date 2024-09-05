@@ -11,7 +11,7 @@ class GetSimilarByIdUseCase {
   });
 
   Future<DataState<List<Movie>>> getSimilarById(
-      QueryParametersRequest queryParametersRequest) async {
-    return await landingRepository.getSimilarById(queryParametersRequest);
+      QueryParametersRequest queryParametersRequest, int movieId) async {
+    return await landingRepository.getSimilarById(queryParametersRequest,  movieId);
   }
 }

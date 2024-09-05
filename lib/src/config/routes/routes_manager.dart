@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/main.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/landing_screen.dart';
+import 'package:movies_website_apps/src/presentation/screens/movie/movie_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/movies/movies_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/search/search_result_screen.dart';
 
@@ -11,6 +12,7 @@ class Routes {
   //web
   static const String landingWeb = "/";
   static const String movies = "/movies";
+  static const String movie = "/movie";
   static const String search = "/search";
 }
 
@@ -66,10 +68,18 @@ final GoRouter webRouter = GoRouter(
         builder: (context, state) => const MoviesScreen()),
     GoRoute(
       path: "${Routes.search}/:query",
+      name: "${Routes.search}/:query",
       builder: (context, state) => SearchResultScreen(
         query: state.pathParameters["query"] ?? "",
       ),
     ),
+    GoRoute(
+      path: "${Routes.movie}/:movie_id",
+      name: "${Routes.movie}/:movie_id",
+      builder:  (context, state) => MovieScreen(
+        movieId: int.parse(state.pathParameters["movie_id"]??"0"),
+      ),
+    )
     // GoRoute(
     //     path: "${Routes.unitDetailsWeb}/:id",
     //     builder: (context, state) => UnitDetailsWebScreen(

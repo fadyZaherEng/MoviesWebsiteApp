@@ -46,11 +46,13 @@ abstract class LandingApiServices {
   Future<HttpResponse<TMDBResponse<RemoteMovies>>> getMovieDetailsById(
     @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
+    @Path("movie_id") int movieId,
   );
 
   @GET(APIKeys.similar)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getSimilarById(
     @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
+    @Path("movie_id") int movieId,
   );
 }
