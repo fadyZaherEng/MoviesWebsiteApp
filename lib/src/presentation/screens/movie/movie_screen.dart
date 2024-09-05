@@ -54,11 +54,11 @@ class _MovieScreenState extends State<MovieScreen> {
         _currentMovie = state.movie;
       } else if (state is LandingMovieDetailsError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(state.message ?? ""),
+          content: Text(state.message),
         ));
       } else if (state is LandingSimilarError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(state.message ?? ""),
+          content: Text(state.message),
         ));
       }
     }, builder: (context, state) {
@@ -221,7 +221,7 @@ class _MovieScreenState extends State<MovieScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  _currentMovie.originalTitle ?? "",
+                                  _currentMovie.originalTitle,
                                   style: const TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -231,7 +231,7 @@ class _MovieScreenState extends State<MovieScreen> {
                                   height: 8,
                                 ),
                                 Text(
-                                  _currentMovie.releaseDate ?? "",
+                                  _currentMovie.releaseDate,
                                   style: const TextStyle(
                                       fontSize: 20, color: Colors.white),
                                 ),
@@ -247,14 +247,14 @@ class _MovieScreenState extends State<MovieScreen> {
                                   height: 8,
                                 ),
                                 Text(
-                                  _currentMovie.overview ?? "",
+                                  _currentMovie.overview,
                                   style: const TextStyle(
                                       fontSize: 16, color: Colors.white),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8),
                                   child: Text(
-                                    'Original Language: ${_currentMovie.originalLanguage ?? ""}',
+                                    'Original Language: ${_currentMovie.originalLanguage}',
                                     style: const TextStyle(
                                         fontSize: 16,
                                         fontStyle: FontStyle.italic,
