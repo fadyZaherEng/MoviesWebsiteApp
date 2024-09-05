@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   bool isDrawerOpen;
   final void Function() onDrawerPressed;
   final void Function(String) onSearchPressed;
+  final TextEditingController searchTextController;
 
   CustomAppBarWidget({
     super.key,
     this.isDrawerOpen = false,
     required this.onDrawerPressed,
     required this.onSearchPressed,
+    required this.searchTextController,
   });
 
   @override
@@ -49,7 +52,10 @@ class _State extends State<CustomAppBarWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                context.go(Routes.landingWeb);
+                Navigator.popUntil(context, (route) => true);
+              },
               style: TextButton.styleFrom(
                 backgroundColor: const Color(0xFFE2B616),
               ),
@@ -61,11 +67,9 @@ class _State extends State<CustomAppBarWidget> {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 15,
-            ),
+            const SizedBox(width: 15),
             Container(
-            //how to add number in routing from city eye
+              //how to add number in routing from city eye
               width: MediaQuery.of(context).size.width * 0.55,
               height: 40,
               decoration: BoxDecoration(
@@ -75,6 +79,7 @@ class _State extends State<CustomAppBarWidget> {
               ),
               child: Center(
                 child: TextField(
+                  controller: widget.searchTextController,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontStyle: FontStyle.italic,
@@ -101,6 +106,9 @@ class _State extends State<CustomAppBarWidget> {
                     suffixIcon: InkWell(
                       onTap: () {
                         // context.go('/search/');
+                        widget.searchTextController.text = "";
+                        widget
+                            .onSearchPressed(widget.searchTextController.text);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),

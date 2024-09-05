@@ -9,6 +9,7 @@ import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:movies_website_apps/src/presentation/blocs/landing/landing_bloc.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/carousel_slider.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/now_playing_widget.dart';
+import 'package:movies_website_apps/src/presentation/screens/movie/movie_screen.dart';
 import 'package:movies_website_apps/src/presentation/widgets/popular_movies_widget.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/footer.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
@@ -24,6 +25,7 @@ class LandingScreen extends BaseStatefulWidget {
 class _LandingWebScreenState extends BaseState<LandingScreen> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   bool _isDrawerOpen = false;
+  final TextEditingController searchTextController = TextEditingController();
 
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
   List<Movie> _moviesPlayNow = [];
@@ -95,6 +97,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
             ),
             appBar: CustomAppBarWidget(
               isDrawerOpen: _isDrawerOpen,
+              searchTextController: searchTextController,
               onDrawerPressed: () {
                 _isDrawerOpen = false;
                 setState(() {});
@@ -132,12 +135,16 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                         Expanded(
                           flex: 2,
                           child: CarouselSliderWidget(
-                            isLoading: state is LandingTopRatedLoading,
-                            topRatedMovies: _moviesTopRated,
-                            onSliderTap:(int movieId){
-                              context.go("${Routes.movie}/$movieId");
-                            }
-                          ),
+                              isLoading: state is LandingTopRatedLoading,
+                              topRatedMovies: _moviesTopRated,
+                              onSliderTap: (int movieId) {
+                                context.go("${Routes.movie}/$movieId");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MovieScreen(movieId: movieId)));
+                              }),
                         ),
                         Expanded(
                           flex: 1,

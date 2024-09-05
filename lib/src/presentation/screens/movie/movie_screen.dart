@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/core/utils/constants.dart';
@@ -30,6 +28,7 @@ class _MovieScreenState extends State<MovieScreen> {
   bool _isDrawerOpen = false;
   List<Movie> _similarMovies = [];
   Movie? _currentMovie;
+  final TextEditingController searchTextController=TextEditingController();
 
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
 
@@ -73,6 +72,7 @@ class _MovieScreenState extends State<MovieScreen> {
         ),
         appBar: CustomAppBarWidget(
           isDrawerOpen: _isDrawerOpen,
+          searchTextController: searchTextController,
           onDrawerPressed: () {
             _isDrawerOpen = false;
             setState(() {});

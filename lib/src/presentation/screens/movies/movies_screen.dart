@@ -26,6 +26,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
   List<Movie> _upcomingMovies = [];
   List<Movie> _currentMovies = [];
   int _selectedFilterIndex = 0;
+  final TextEditingController searchTextController=TextEditingController();
 
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
 
@@ -94,6 +95,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
           ),
           appBar: CustomAppBarWidget(
             isDrawerOpen: _isDrawerOpen,
+            searchTextController: searchTextController,
             onDrawerPressed: () {
               _isDrawerOpen = false;
               setState(() {});
