@@ -58,6 +58,7 @@ class _State extends State<CustomAppBarWidget> {
               onPressed: () {
                 if (kIsWeb) {
                   // context.go(Routes.landingWeb);
+
                   html.window.location.reload();
 
                 } else {
