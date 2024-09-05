@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 import 'package:movies_website_apps/src/data/sources/remote/movies/landing/request/query_paramters_request.dart';
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
@@ -85,6 +86,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
     }, builder: (context, state) {
       return Scaffold(
           drawer: CustomDrawer(
+            currentPage: Routes.movies,
             onTap: () {
               _isDrawerOpen = false;
               setState(() {});
@@ -156,7 +158,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                             ? (constraints.maxWidth / 5) * 1.25 * 3
                             : (constraints.maxWidth / 5) *
                                 1.25 *
-                                (_currentMovies.length / 4);
+                                (_currentMovies.length / 6);
                         return SizedBox(
                           height: gridHeight,
                           child: PopularMoviesWidget(

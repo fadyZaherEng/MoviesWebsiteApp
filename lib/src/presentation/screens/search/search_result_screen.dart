@@ -51,42 +51,54 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Search Results for "${widget.query}"'),
+          centerTitle: false,
         ),
         body: state is LandingSearchLoading
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      padding: const EdgeInsets.all(10),
-                      itemCount: _movies.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        final movie = _movies[index];
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          elevation: 6,
-                          child: InkWell(
-                            onTap: () {
-                              context.go('/movie/${movie.id}');
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Row(
-                                children: [
-                                  CachedNetworkImage(
-                                      imageUrl:
-                                          '${Constants.imageBaseUrl}${movie.posterPath}',
-                                      width: 100,
-                                      height: 150,
-                                      fit: BoxFit.cover,
-                                      errorWidget:
-                                          (context, error, stackTrace) =>
+            : _movies.isEmpty
+                ? const Center(
+                    child: Text(
+                    'No Results Found',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ))
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          padding: const EdgeInsets.all(10),
+                          itemCount: _movies.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final movie = _movies[index];
+                            return Card(
+                              color: Colors.black12,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              elevation: 6,
+                              child: InkWell(
+                                onTap: () {
+                                  context.go('/movie/${movie.id}');
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: Row(
+                                    children: [
+                                      CachedNetworkImage(
+                                          imageUrl:
+                                              '${Constants.imageBaseUrl}${movie.posterPath}',
+                                          width: 100,
+                                          height: 150,
+                                          fit: BoxFit.cover,
+                                          errorWidget: (context, error,
+                                                  stackTrace) =>
                                               const SkeletonLine(
                                                   style: SkeletonLineStyle(
                                                 width: 100,
@@ -96,110 +108,127 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                   topRight: Radius.circular(8),
                                                 ),
                                               )),
-                                      matchTextDirection: true,
-                                      placeholder: (context, _) {
-                                        return const SkeletonLine(
-                                            style: SkeletonLineStyle(
-                                          width: 100,
-                                          height: 150,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(8),
-                                            topRight: Radius.circular(8),
-                                          ),
-                                        ));
-                                      }),
-                                  const SizedBox(
-                                    width: 20,
+                                          matchTextDirection: true,
+                                          placeholder: (context, _) {
+                                            return const SkeletonLine(
+                                                style: SkeletonLineStyle(
+                                              width: 100,
+                                              height: 150,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(8),
+                                                topRight: Radius.circular(8),
+                                              ),
+                                            ));
+                                          }),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              movie.title,
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              movie.overview,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(
+                                              height: 15,
+                                            ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.star,
+                                                        color: Colors.yellow,
+                                                      ),
+                                                      Text(
+                                                          'Vote Count: ${movie.voteCount}',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 12,
+                                                          ))
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.trending_up,
+                                                        color: Colors.orange,
+                                                      ),
+                                                      Text(
+                                                          'Popularity: ${movie.popularity}',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 12,
+                                                          ))
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.calendar_today,
+                                                        color: Colors.green,
+                                                      ),
+                                                      Text(
+                                                        'Release Date: ${movie.releaseDate}',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          movie.title,
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          movie.overview,
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                          ),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.star,
-                                                    color: Colors.yellow,
-                                                  ),
-                                                  Text(
-                                                      'Vote Count: ${movie.voteCount}')
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.trending_up,
-                                                    color: Colors.orange,
-                                                  ),
-                                                  Text(
-                                                      'Popularity: ${movie.popularity}')
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.calendar_today,
-                                                    color: Colors.green,
-                                                  ),
-                                                  Text(
-                                                      'Release Date: ${movie.releaseDate}')
-                                                ],
-                                              ),
-                                              const SizedBox(
-                                                width: 20,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      },
+                            );
+                          },
+                        ),
+                        const FooterWidget(),
+                      ],
                     ),
-                    const FooterWidget(),
-                  ],
-                ),
-              ),
+                  ),
       );
     });
   }

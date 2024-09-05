@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 import 'package:movies_website_apps/src/core/base/widget/base_stateful_widget.dart';
 import 'package:movies_website_apps/src/data/sources/remote/movies/landing/request/query_paramters_request.dart';
@@ -48,8 +49,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
 
   @override
   Widget baseBuild(BuildContext context) {
-    return BlocConsumer<LandingBloc, LandingState>(
-    listener: (context, state) {
+    return BlocConsumer<LandingBloc, LandingState>(listener: (context, state) {
       if (state is LandingPlayNowSuccess) {
         _moviesPlayNow = state.movies;
       } else if (state is LandingTopRatedSuccess) {
@@ -86,6 +86,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
           return Scaffold(
             key: scaffoldKey,
             drawer: CustomDrawer(
+              currentPage: Routes.landingWeb,
               onTap: () {
                 _isDrawerOpen = false;
                 setState(() {});
@@ -185,7 +186,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                               ? (constraints.maxWidth / 5) * 1.25 * 3
                               : (constraints.maxWidth / 5) *
                                   1.25 *
-                                  (_moviesPopular.length / 4);
+                                  (_moviesPopular.length / 6);
                           return SizedBox(
                             height: gridHeight,
                             child: PopularMoviesWidget(
