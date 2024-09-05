@@ -22,7 +22,7 @@ class MovieScreen extends StatefulWidget {
 
   @override
   State<MovieScreen> createState() => _MovieScreenState();
-}//remote model for movie
+} //remote model for movie
 
 class _MovieScreenState extends State<MovieScreen> {
   bool _isDrawerOpen = false;
@@ -101,33 +101,28 @@ class _MovieScreenState extends State<MovieScreen> {
                     Stack(
                       children: [
                         CachedNetworkImage(
-                            imageUrl:
-                                '${Constants.originalImageBaseUrl}${_currentMovie.backdropPath}',
-                            width: double.infinity,
-                            height: 600,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, error, stackTrace) =>
-                                const SkeletonLine(
-                                    style: SkeletonLineStyle(
-                                  width: double.infinity,
-                                  height: 600,
-                                  // borderRadius: BorderRadius.only(
-                                  //   topLeft: Radius.circular(8),
-                                  //   topRight: Radius.circular(8),
-                                  // ),
-                                )),
-                            matchTextDirection: true,
-                            placeholder: (context, _) {
-                              return const SkeletonLine(
-                                  style: SkeletonLineStyle(
+                          imageUrl:
+                              '${Constants.originalImageBaseUrl}${_currentMovie.backdropPath}',
+                          width: double.infinity,
+                          height: 600,
+                          fit: BoxFit.cover,
+                          errorWidget: (context, error, stackTrace) =>
+                              const SkeletonLine(
+                            style: SkeletonLineStyle(
+                              width: double.infinity,
+                              height: 600,
+                            ),
+                          ),
+                          matchTextDirection: true,
+                          placeholder: (context, _) {
+                            return const SkeletonLine(
+                              style: SkeletonLineStyle(
                                 width: double.infinity,
                                 height: 600,
-                                // borderRadius: BorderRadius.only(
-                                //   topLeft: Radius.circular(8),
-                                //   topRight: Radius.circular(8),
-                                // ),
-                              ));
-                            }),
+                              ),
+                            );
+                          },
+                        ),
                         Container(
                           width: double.infinity,
                           height: 600,
@@ -249,16 +244,19 @@ class _MovieScreenState extends State<MovieScreen> {
                                 Text(
                                   _currentMovie.overview,
                                   style: const TextStyle(
-                                      fontSize: 16, color: Colors.white),
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8),
                                   child: Text(
                                     'Original Language: ${_currentMovie.originalLanguage}',
                                     style: const TextStyle(
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.grey),
+                                      fontSize: 16,
+                                      fontStyle: FontStyle.italic,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 )
                               ],
@@ -274,7 +272,10 @@ class _MovieScreenState extends State<MovieScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
                 child: Text(
                   'Similar Movies',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
