@@ -23,8 +23,8 @@ class RoutesManager {
       // case Routes.splash:
       // case Routes.deepLinking:
       //   return _materialRoute(const SplashScreen());
-      case Routes.landing:
-        return _materialRoute(const LandingScreen());
+      // case Routes.landing:
+      //   return _materialRoute(const LandingScreen());
       case Routes.landingWeb:
         return _materialRoute(const LandingScreen());
       case Routes.movies:

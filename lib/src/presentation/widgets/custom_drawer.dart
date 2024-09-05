@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/generated/l10n.dart';
@@ -62,11 +63,14 @@ class CustomDrawer extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       if (currentPage != Routes.landingWeb) {
-                        context.go(Routes.landingWeb);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LandingScreen()));
+                        if (kIsWeb) {
+                          context.go(Routes.landingWeb);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LandingScreen()));
+                        }
                       }
                       onTap();
                       Scaffold.of(context).closeDrawer();
@@ -86,11 +90,14 @@ class CustomDrawer extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       if (currentPage != Routes.movies) {
-                        context.go(Routes.movies);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MoviesScreen()));
+                        if (kIsWeb) {
+                          context.go(Routes.movies);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MoviesScreen()));
+                        }
                       }
                       onTap();
                       Scaffold.of(context).closeDrawer();
