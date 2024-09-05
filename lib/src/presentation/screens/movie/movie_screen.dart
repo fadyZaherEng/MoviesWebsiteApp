@@ -22,7 +22,7 @@ class MovieScreen extends StatefulWidget {
 
   @override
   State<MovieScreen> createState() => _MovieScreenState();
-}
+}//remote model for movie
 
 class _MovieScreenState extends State<MovieScreen> {
   bool _isDrawerOpen = false;
