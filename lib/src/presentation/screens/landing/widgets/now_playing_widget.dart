@@ -8,11 +8,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 class NowPlayingWidget extends StatelessWidget {
   final bool isLoading;
   final List<Movie> nowPlayingMovies;
+  final void Function(int) onNowPlayTap;
+
 
   const NowPlayingWidget({
     super.key,
     required this.isLoading,
     required this.nowPlayingMovies,
+    required this.onNowPlayTap,
   });
 
   @override
@@ -41,7 +44,9 @@ class NowPlayingWidget extends StatelessWidget {
                 ),
               )
             : GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  onNowPlayTap(nowPlayingMovies[index].id);
+                },
                 child: ListTile(
                   leading:CachedNetworkImage(
                    imageUrl:  "${Constants.imageBaseUrl}${nowPlayingMovies[index].posterPath}",

@@ -59,7 +59,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
         _moviesTopRated = state.movies;
       } else if (state is LandingPlayNowError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(state.message ?? ""),
+          content: Text(state.message),
         ));
       } else if (state is LandingUpcomingSuccess) {
         _moviesUpComing = state.movies;
@@ -69,19 +69,19 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
         _moviesPopular = state.movies;
       } else if (state is LandingTopRatedError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(state.message ?? ""),
+          content: Text(state.message),
         ));
       } else if (state is LandingPopularError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(state.message ?? ""),
+          content: Text(state.message),
         ));
       } else if (state is LandingUpcomingError) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(state.message ?? ""),
+          content: Text(state.message),
         ));
       } else if (state is LandingSearchError) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(state.message ?? "")));
+            .showSnackBar(SnackBar(content: Text(state.message)));
       }
     }, builder: (context, state) {
       return LayoutBuilder(
@@ -145,8 +145,8 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MovieScreen(movieId: movieId)));
+                                              builder: (context) => MovieScreen(
+                                                  movieId: movieId)));
                                     }),
                               ),
                               Expanded(
@@ -165,7 +165,8 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge
-                                              ?.copyWith(color: ColorSchemes.white),
+                                              ?.copyWith(
+                                                  color: ColorSchemes.white),
                                         ),
                                       ],
                                     ),
@@ -173,9 +174,19 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                     SizedBox(
                                       height: 450,
                                       child: NowPlayingWidget(
-                                        isLoading: state is LandingPlayNowLoading,
-                                        nowPlayingMovies: _moviesPlayNow,
-                                      ),
+                                          isLoading:
+                                              state is LandingPlayNowLoading,
+                                          nowPlayingMovies: _moviesPlayNow,
+                                          onNowPlayTap: (int movieId) {
+                                            context
+                                                .go("${Routes.movie}/$movieId");
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MovieScreen(
+                                                            movieId: movieId)));
+                                          }),
                                     ),
                                   ],
                                 ),
@@ -194,13 +205,14 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: LayoutBuilder(
-                              builder:
-                                  (BuildContext context, BoxConstraints constraints) {
-                                double gridHeight = state is LandingPopularLoading
-                                    ? (constraints.maxWidth / 5) * 1.25 * 3
-                                    : (constraints.maxWidth / 5) *
-                                        1.25 *
-                                        (_moviesPopular.length / 6);
+                              builder: (BuildContext context,
+                                  BoxConstraints constraints) {
+                                double gridHeight =
+                                    state is LandingPopularLoading
+                                        ? (constraints.maxWidth / 5) * 1.25 * 3
+                                        : (constraints.maxWidth / 5) *
+                                            1.25 *
+                                            (_moviesPopular.length / 6);
                                 return SizedBox(
                                   height: gridHeight,
                                   child: PopularMoviesWidget(
