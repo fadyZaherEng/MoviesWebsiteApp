@@ -145,6 +145,7 @@ class LandingRepositoryImplementation implements LandingRepository {
         movieId,
       );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
+        print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ${httpResponse.data.result?.backdropPath}");
         return DataSuccess(
           data:
               (httpResponse.data.result ?? const RemoteMovies()).mapToDomain(),
