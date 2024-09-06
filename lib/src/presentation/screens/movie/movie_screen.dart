@@ -34,10 +34,10 @@ class _MovieScreenState extends State<MovieScreen> {
 
   @override
   void initState() {
-    // _bloc.add(LandingGetSimilarByIdEvent(
-    //   queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
-    //   movieId: widget.movieId,
-    // ));
+    _bloc.add(LandingGetSimilarByIdEvent(
+      queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
+      movieId: widget.movieId,
+    ));
     _bloc.add(LandingGetMovieByIdEvent(
       queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
       movieId: widget.movieId,

@@ -140,16 +140,11 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getMovieDetailsById(
-        request,
-        queryParametersRequest,
-        movieId,
-      );
+          request, queryParametersRequest, movieId);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ${httpResponse.data.result?.backdropPath}");
         return DataSuccess(
-          data:
-              (httpResponse.data.result ?? const RemoteMovies()).mapToDomain(),
-          message: httpResponse.data.responseMessage ?? "",
+          data: Movie.fromJson(httpResponse.response.data ?? {}),
+          message: httpResponse.response.statusMessage ?? "",
         );
       }
       return DataFailed(
@@ -169,7 +164,10 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getSimilarById(
-          request, queryParametersRequest, movieId);
+        request,
+        queryParametersRequest,
+        movieId,
+      );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
