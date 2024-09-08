@@ -60,6 +60,11 @@ class _MovieScreenState extends State<MovieScreen> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(state.message),
         ));
+      } else if (state is LandingSearchError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.message)));
+      } else if (state is LandingSearchSuccess) {
+        _similarMovies = state.movies;
       }
     }, builder: (context, state) {
       return Scaffold(

@@ -1,21 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/core/utils/constants.dart';
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
+import 'package:movies_website_apps/src/presentation/screens/movie/movie_screen.dart';
 import 'package:skeletons/skeletons.dart';
 
 class MoviesWidget extends StatefulWidget {
   final bool isLoading;
   final List<Movie> popularMovies;
   final void Function(int) onMovieTap;
+  final bool isMoviesScreen;
 
   const MoviesWidget({
     super.key,
     required this.isLoading,
     required this.popularMovies,
     required this.onMovieTap,
+    this.isMoviesScreen = false,
   });
 
   @override
@@ -71,7 +75,25 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                       : Matrix4.identity(),
                   child: GestureDetector(
                     onTap: () {
-                      widget.onMovieTap(index);
+                      // widget.onMovieTap(index);
+                      if (widget.isMoviesScreen) {
+                        if (kIsWeb) {
+                          widget.onMovieTap(index);
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MovieScreen(
+                                      movieId:
+                                          widget.popularMovies[index].id)));
+                        }
+                      } else {
+                        if (kIsWeb) {
+                          context.go(Routes.movies);
+                        } else {
+                          Navigator.of(context).pushNamed(Routes.movies);
+                        }
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.all(8),

@@ -168,6 +168,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                           child: MoviesWidget(
                             isLoading: state is LandingPopularLoading,
                             popularMovies: _currentMovies,
+                            isMoviesScreen: true,
                             onMovieTap: (int movieId) {
                               context.go("${Routes.movie}/$movieId");
                               Navigator.push(
