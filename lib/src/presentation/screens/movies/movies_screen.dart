@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/config/theme/color_schemes.dart';
 import 'package:movies_website_apps/src/data/sources/remote/movies/landing/request/query_paramters_request.dart';
 import 'package:movies_website_apps/src/domain/entities/landing/movie.dart';
 import 'package:movies_website_apps/src/presentation/blocs/landing/landing_bloc.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/footer.dart';
+import 'package:movies_website_apps/src/presentation/screens/movie/movie_screen.dart';
 import 'package:movies_website_apps/src/presentation/screens/movies/widgets/movies_filter_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_drawer.dart';
@@ -26,7 +28,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
   List<Movie> _upcomingMovies = [];
   List<Movie> _currentMovies = [];
   int _selectedFilterIndex = 0;
-  final TextEditingController searchTextController=TextEditingController();
+  final TextEditingController searchTextController = TextEditingController();
 
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
 
@@ -166,6 +168,15 @@ class _MoviesScreenState extends State<MoviesScreen> {
                           child: MoviesWidget(
                             isLoading: state is LandingPopularLoading,
                             popularMovies: _currentMovies,
+                            onMovieTap: (int movieId) {
+                              context.go("${Routes.movie}/$movieId");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MovieScreen(movieId: movieId)),
+                              );
+                            },
                           ),
                         );
                       },

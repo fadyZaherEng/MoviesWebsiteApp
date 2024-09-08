@@ -146,11 +146,12 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                             context
                                                 .go("${Routes.movie}/$movieId");
                                             Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        MovieScreen(
-                                                            movieId: movieId)));
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      MovieScreen(
+                                                          movieId: movieId)),
+                                            );
                                           }),
                                     ),
                                     Expanded(
@@ -290,6 +291,16 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                   child: MoviesWidget(
                                     isLoading: state is LandingPopularLoading,
                                     popularMovies: _moviesPopular,
+                                    onMovieTap: (int movieId) {
+                                      context
+                                          .go("${Routes.movie}/$movieId");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MovieScreen(movieId: movieId)),
+                                      );
+                                    }
                                   ),
                                 );
                               },

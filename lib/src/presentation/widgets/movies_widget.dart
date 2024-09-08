@@ -9,11 +9,13 @@ import 'package:skeletons/skeletons.dart';
 class MoviesWidget extends StatefulWidget {
   final bool isLoading;
   final List<Movie> popularMovies;
+  final void Function(int) onMovieTap;
 
   const MoviesWidget({
     super.key,
     required this.isLoading,
     required this.popularMovies,
+    required this.onMovieTap,
   });
 
   @override
@@ -46,9 +48,9 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                     )))
             : MouseRegion(
                 onEnter: (_) {
-                  // setState(() {
-                  //   _hoverIndex = index;
-                  // });
+                  setState(() {
+                    _hoverIndex = index;
+                  });
                 },
                 onExit: (_) {
                   setState(() {
@@ -69,9 +71,7 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                       : Matrix4.identity(),
                   child: GestureDetector(
                     onTap: () {
-                      context.go(
-                        '${Routes.movies}/${widget.popularMovies[index].id}',
-                      );
+                      widget.onMovieTap(index);
                     },
                     child: Container(
                       padding: const EdgeInsets.all(8),

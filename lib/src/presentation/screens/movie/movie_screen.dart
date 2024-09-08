@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies_website_apps/src/config/routes/routes_manager.dart';
 import 'package:movies_website_apps/src/core/utils/constants.dart';
 import 'package:movies_website_apps/src/data/sources/remote/movies/landing/request/query_paramters_request.dart';
@@ -31,11 +32,15 @@ class _MovieScreenState extends State<MovieScreen> {
   final TextEditingController searchTextController = TextEditingController();
 
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
-
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
   @override
   void didUpdateWidget(covariant MovieScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if(oldWidget.movieId != widget.movieId){
+    if (oldWidget.movieId != widget.movieId) {
       init();
     }
   }
@@ -89,7 +94,7 @@ class _MovieScreenState extends State<MovieScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                 height: 700,
+                height: 700,
                 width: double.infinity,
                 child: Stack(
                   children: [
@@ -290,6 +295,15 @@ class _MovieScreenState extends State<MovieScreen> {
                       child: MoviesWidget(
                         isLoading: state is LandingPopularLoading,
                         popularMovies: _similarMovies,
+                        onMovieTap: (int movieId) {
+                          context.go("${Routes.movie}/$movieId");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    MovieScreen(movieId: movieId)),
+                          );
+                        },
                       ),
                     );
                   },
