@@ -222,9 +222,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                                             movieId: movieId)));
                                           }),
                                     ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
+                                    const SizedBox(height: 20),
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -250,8 +248,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                           child: NowPlayingWidget(
                                               isLoading: state
                                                   is LandingPlayNowLoading,
-                                              nowPlayingMovies:
-                                                  _moviesPlayNow,
+                                              nowPlayingMovies: _moviesPlayNow,
                                               onNowPlayTap: (int movieId) {
                                                 context.go(
                                                     "${Routes.movie}/$movieId");
