@@ -23,11 +23,14 @@ import 'package:huawei_hmsavailability/huawei_hmsavailability.dart';
 import 'package:provider/provider.dart';
 
 import 'package:url_strategy/url_strategy.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 Future<void> main() async {
   ChuckerFlutter.showNotification=true;
   ChuckerFlutter.showOnRelease=true;
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
   if (!kIsWeb) {
