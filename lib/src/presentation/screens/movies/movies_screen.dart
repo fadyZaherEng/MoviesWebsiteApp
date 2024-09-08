@@ -157,50 +157,50 @@ class _MoviesScreenState extends State<MoviesScreen> {
                           ?.copyWith(color: ColorSchemes.white),
                     ),
                     const SizedBox(height: 20),
-                    MoviesWidget(
-                      isLoading: state is LandingPopularLoading,
-                      movies: _currentMovies,
-                      isMoviesScreen: true,
-                      onMovieTap: (int movieId) {
-                        context.go("${Routes.movie}/$movieId");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  MovieScreen(movieId: movieId)),
-                        );
-                      },
-                    )
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 20),
-                    //   child: LayoutBuilder(
-                    //     builder:
-                    //         (BuildContext context, BoxConstraints constraints) {
-                    //       double gridHeight = state is LandingPopularLoading
-                    //           ? (constraints.maxWidth / 5) * 1.25 * 3
-                    //           : (constraints.maxWidth / 5) *
-                    //               1.25 *
-                    //               (_currentMovies.length / 6);
-                    //       return SizedBox(
-                    //         height: gridHeight,
-                    //         child: MoviesWidget(
-                    //           isLoading: state is LandingPopularLoading,
-                    //           movies: _currentMovies,
-                    //           isMoviesScreen: true,
-                    //           onMovieTap: (int movieId) {
-                    //             context.go("${Routes.movie}/$movieId");
-                    //             Navigator.push(
-                    //               context,
-                    //               MaterialPageRoute(
-                    //                   builder: (context) =>
-                    //                       MovieScreen(movieId: movieId)),
-                    //             );
-                    //           },
-                    //         ),
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
+                    // MoviesWidget(
+                    //   isLoading: state is LandingPopularLoading,
+                    //   movies: _currentMovies,
+                    //   isMoviesScreen: true,
+                    //   onMovieTap: (int movieId) {
+                    //     context.go("${Routes.movie}/$movieId");
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) =>
+                    //               MovieScreen(movieId: movieId)),
+                    //     );
+                    //   },
+                    // )
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          double gridHeight = state is LandingPopularLoading
+                              ? (constraints.maxWidth / 5) * 1.25 * 3
+                              : (constraints.maxWidth / 5) *
+                                  1.25 *
+                                  (_currentMovies.length / 5);
+                          return SizedBox(
+                            height: gridHeight,
+                            child: MoviesWidget(
+                              isLoading: state is LandingPopularLoading,
+                              movies: _currentMovies,
+                              isMoviesScreen: true,
+                              onMovieTap: (int movieId) {
+                                context.go("${Routes.movie}/$movieId");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MovieScreen(movieId: movieId)),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
