@@ -88,108 +88,128 @@ class _MoviesScreenState extends State<MoviesScreen> {
       }
     }, builder: (context, state) {
       return Scaffold(
-          drawer: CustomDrawer(
-            currentPage: Routes.movies,
-            onTap: () {
-              _isDrawerOpen = false;
-              setState(() {});
-            },
-          ),
-          appBar: CustomAppBarWidget(
-            isDrawerOpen: _isDrawerOpen,
-            searchTextController: searchTextController,
-            onDrawerPressed: () {
-              _isDrawerOpen = false;
-              setState(() {});
-            },
-            onSearchPressed: (String query) {
-              _bloc.add(
-                LandingSearchEvent(
-                  queryParametersRequest: QueryParametersRequest(
-                    language: "en",
-                    page: 1,
-                    query: query,
-                  ),
+        drawer: CustomDrawer(
+          currentPage: Routes.movies,
+          onTap: () {
+            _isDrawerOpen = false;
+            setState(() {});
+          },
+        ),
+        appBar: CustomAppBarWidget(
+          isDrawerOpen: _isDrawerOpen,
+          searchTextController: searchTextController,
+          onDrawerPressed: () {
+            _isDrawerOpen = false;
+            setState(() {});
+          },
+          onSearchPressed: (String query) {
+            _bloc.add(
+              LandingSearchEvent(
+                queryParametersRequest: QueryParametersRequest(
+                  language: "en",
+                  page: 1,
+                  query: query,
                 ),
-              );
-            },
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: Text(
-                      'Explore Movies',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+              ),
+            );
+          },
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      child: Text(
+                        'Explore Movies',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  MoviesFilterWidget(
-                    topRatedMovies: _topRatedMovies,
-                    nowPlayingMovies: _nowPlayingMovies,
-                    popularMovies: _popularMovies,
-                    upcomingMovies: _upcomingMovies,
-                    currentMovies: _currentMovies,
-                    onChange: (index, movies) {
-                      setState(() {
-                        _selectedFilterIndex = index;
-                        _currentMovies = movies;
-                      });
-                    },
-                    selectedFilterIndex: _selectedFilterIndex,
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Explore Popular Movies",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(color: ColorSchemes.white),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                        double gridHeight = state is LandingPopularLoading
-                            ? (constraints.maxWidth / 5) * 1.25 * 3
-                            : (constraints.maxWidth / 5) *
-                                1.25 *
-                                (_currentMovies.length / 6);
-                        return SizedBox(
-                          height: gridHeight,
-                          child: MoviesWidget(
-                            isLoading: state is LandingPopularLoading,
-                            movies: _currentMovies,
-                            isMoviesScreen: true,
-                            onMovieTap: (int movieId) {
-                              context.go("${Routes.movie}/$movieId");
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        MovieScreen(movieId: movieId)),
-                              );
-                            },
-                          ),
+                    MoviesFilterWidget(
+                      topRatedMovies: _topRatedMovies,
+                      nowPlayingMovies: _nowPlayingMovies,
+                      popularMovies: _popularMovies,
+                      upcomingMovies: _upcomingMovies,
+                      currentMovies: _currentMovies,
+                      onChange: (index, movies) {
+                        setState(() {
+                          _selectedFilterIndex = index;
+                          _currentMovies = movies;
+                        });
+                      },
+                      selectedFilterIndex: _selectedFilterIndex,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Explore Popular Movies",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(color: ColorSchemes.white),
+                    ),
+                    const SizedBox(height: 20),
+                    MoviesWidget(
+                      isLoading: state is LandingPopularLoading,
+                      movies: _currentMovies,
+                      isMoviesScreen: true,
+                      onMovieTap: (int movieId) {
+                        context.go("${Routes.movie}/$movieId");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  MovieScreen(movieId: movieId)),
                         );
                       },
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const FooterWidget(),
-                  const SizedBox(height: 20),
-                ],
+                    )
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                    //   child: LayoutBuilder(
+                    //     builder:
+                    //         (BuildContext context, BoxConstraints constraints) {
+                    //       double gridHeight = state is LandingPopularLoading
+                    //           ? (constraints.maxWidth / 5) * 1.25 * 3
+                    //           : (constraints.maxWidth / 5) *
+                    //               1.25 *
+                    //               (_currentMovies.length / 6);
+                    //       return SizedBox(
+                    //         height: gridHeight,
+                    //         child: MoviesWidget(
+                    //           isLoading: state is LandingPopularLoading,
+                    //           movies: _currentMovies,
+                    //           isMoviesScreen: true,
+                    //           onMovieTap: (int movieId) {
+                    //             context.go("${Routes.movie}/$movieId");
+                    //             Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                   builder: (context) =>
+                    //                       MovieScreen(movieId: movieId)),
+                    //             );
+                    //           },
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
-            ),
-          ));
+              const SizedBox(height: 20),
+              const FooterWidget(),
+            ],
+          ),
+        ),
+      );
     });
   }
 }
