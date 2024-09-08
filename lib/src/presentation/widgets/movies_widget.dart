@@ -119,7 +119,7 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 errorWidget: (context, error, stackTrace) =>
-                                    const Icon(Icons.error,size: 100),
+                                    const Icon(Icons.error, size: 100),
                                 matchTextDirection: true,
                                 placeholder: (context, _) {
                                   return const SkeletonLine(
@@ -143,17 +143,15 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  widget.movies[index].title,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                      ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                Text(widget.movies[index].title,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                        ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis),
                                 const SizedBox(height: 15),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
