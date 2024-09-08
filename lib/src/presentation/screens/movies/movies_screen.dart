@@ -167,7 +167,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                           height: gridHeight,
                           child: MoviesWidget(
                             isLoading: state is LandingPopularLoading,
-                            popularMovies: _currentMovies,
+                            movies: _currentMovies,
                             isMoviesScreen: true,
                             onMovieTap: (int movieId) {
                               context.go("${Routes.movie}/$movieId");

@@ -290,7 +290,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                   height: gridHeight,
                                   child: MoviesWidget(
                                     isLoading: state is LandingPopularLoading,
-                                    popularMovies: _moviesPopular,
+                                    movies: _moviesPopular,
                                     onMovieTap: (int movieId) {
                                       context
                                           .go("${Routes.movie}/$movieId");
