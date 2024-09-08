@@ -9,7 +9,7 @@ import 'package:movies_website_apps/src/presentation/screens/landing/widgets/foo
 import 'package:movies_website_apps/src/presentation/screens/movies/widgets/movies_filter_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_drawer.dart';
-import 'package:movies_website_apps/src/presentation/widgets/popular_movies_widget.dart';
+import 'package:movies_website_apps/src/presentation/widgets/movies_widget.dart';
 
 class MoviesScreen extends StatefulWidget {
   const MoviesScreen({super.key});
@@ -163,7 +163,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                 (_currentMovies.length / 6);
                         return SizedBox(
                           height: gridHeight,
-                          child: PopularMoviesWidget(
+                          child: MoviesWidget(
                             isLoading: state is LandingPopularLoading,
                             popularMovies: _currentMovies,
                           ),

@@ -9,7 +9,7 @@ import 'package:movies_website_apps/src/presentation/blocs/landing/landing_bloc.
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/footer.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_drawer.dart';
-import 'package:movies_website_apps/src/presentation/widgets/popular_movies_widget.dart';
+import 'package:movies_website_apps/src/presentation/widgets/movies_widget.dart';
 import 'package:skeletons/skeletons.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -33,16 +33,11 @@ class _MovieScreenState extends State<MovieScreen> {
   LandingBloc get _bloc => BlocProvider.of<LandingBloc>(context);
 
   @override
-  void initState() {
-    _bloc.add(LandingGetSimilarByIdEvent(
-      queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
-      movieId: widget.movieId,
-    ));
-    _bloc.add(LandingGetMovieByIdEvent(
-      queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
-      movieId: widget.movieId,
-    ));
-    super.initState();
+  void didUpdateWidget(covariant MovieScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if(oldWidget.movieId != widget.movieId){
+      init();
+    }
   }
 
   @override
@@ -94,7 +89,7 @@ class _MovieScreenState extends State<MovieScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 900,
+                 height: 700,
                 width: double.infinity,
                 child: Stack(
                   children: [
@@ -140,8 +135,8 @@ class _MovieScreenState extends State<MovieScreen> {
                     ),
                     Positioned(
                       left: 10,
-                      right: 0,
-                      bottom: 150,
+                      right: 10,
+                      bottom: 0,
                       child: Row(
                         children: [
                           Stack(
@@ -223,7 +218,7 @@ class _MovieScreenState extends State<MovieScreen> {
                                       color: Colors.white),
                                 ),
                                 const SizedBox(
-                                  height: 8,
+                                  height: 20,
                                 ),
                                 Text(
                                   _currentMovie.releaseDate,
@@ -268,13 +263,15 @@ class _MovieScreenState extends State<MovieScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   'Similar Movies',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -290,7 +287,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             (_similarMovies.length / 6);
                     return SizedBox(
                       height: gridHeight,
-                      child: PopularMoviesWidget(
+                      child: MoviesWidget(
                         isLoading: state is LandingPopularLoading,
                         popularMovies: _similarMovies,
                       ),
@@ -305,5 +302,16 @@ class _MovieScreenState extends State<MovieScreen> {
         ),
       );
     });
+  }
+
+  void init() {
+    _bloc.add(LandingGetSimilarByIdEvent(
+      queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
+      movieId: widget.movieId,
+    ));
+    _bloc.add(LandingGetMovieByIdEvent(
+      queryParametersRequest: QueryParametersRequest(language: "en", page: 1),
+      movieId: widget.movieId,
+    ));
   }
 }

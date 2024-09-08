@@ -10,7 +10,7 @@ import 'package:movies_website_apps/src/presentation/blocs/landing/landing_bloc.
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/carousel_slider.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/now_playing_widget.dart';
 import 'package:movies_website_apps/src/presentation/screens/movie/movie_screen.dart';
-import 'package:movies_website_apps/src/presentation/widgets/popular_movies_widget.dart';
+import 'package:movies_website_apps/src/presentation/widgets/movies_widget.dart';
 import 'package:movies_website_apps/src/presentation/screens/landing/widgets/footer.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_drawer.dart';
@@ -133,51 +133,16 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                 ?.copyWith(color: ColorSchemes.white),
                           ),
                           const SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: CarouselSliderWidget(
-                                    isLoading: state is LandingTopRatedLoading,
-                                    topRatedMovies: _moviesTopRated,
-                                    onSliderTap: (int movieId) {
-                                      context.go("${Routes.movie}/$movieId");
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => MovieScreen(
-                                                  movieId: movieId)));
-                                    }),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                          const Responsive().isDesktop(context)
+                              ? Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 30,
-                                        ),
-                                        Text(
-                                          "Now Playing",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge
-                                              ?.copyWith(
-                                                  color: ColorSchemes.white),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 15),
-                                    SizedBox(
-                                      height: 450,
-                                      child: NowPlayingWidget(
+                                    Expanded(
+                                      flex: 2,
+                                      child: CarouselSliderWidget(
                                           isLoading:
-                                              state is LandingPlayNowLoading,
-                                          nowPlayingMovies: _moviesPlayNow,
-                                          onNowPlayTap: (int movieId) {
+                                              state is LandingTopRatedLoading,
+                                          topRatedMovies: _moviesTopRated,
+                                          onSliderTap: (int movieId) {
                                             context
                                                 .go("${Routes.movie}/$movieId");
                                             Navigator.push(
@@ -188,11 +153,121 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                                             movieId: movieId)));
                                           }),
                                     ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 30,
+                                              ),
+                                              Text(
+                                                "Now Playing",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge
+                                                    ?.copyWith(
+                                                        color:
+                                                            ColorSchemes.white),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 15),
+                                          SizedBox(
+                                            height: 450,
+                                            child: NowPlayingWidget(
+                                                isLoading: state
+                                                    is LandingPlayNowLoading,
+                                                nowPlayingMovies:
+                                                    _moviesPlayNow,
+                                                onNowPlayTap: (int movieId) {
+                                                  context.go(
+                                                      "${Routes.movie}/$movieId");
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MovieScreen(
+                                                                  movieId:
+                                                                      movieId)));
+                                                }),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      child: CarouselSliderWidget(
+                                          isLoading:
+                                              state is LandingTopRatedLoading,
+                                          topRatedMovies: _moviesTopRated,
+                                          onSliderTap: (int movieId) {
+                                            context
+                                                .go("${Routes.movie}/$movieId");
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MovieScreen(
+                                                            movieId: movieId)));
+                                          }),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "Now Playing",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.copyWith(
+                                                      color:
+                                                          ColorSchemes.white),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 15),
+                                        SizedBox(
+                                          height: 450,
+                                          child: NowPlayingWidget(
+                                              isLoading: state
+                                                  is LandingPlayNowLoading,
+                                              nowPlayingMovies:
+                                                  _moviesPlayNow,
+                                              onNowPlayTap: (int movieId) {
+                                                context.go(
+                                                    "${Routes.movie}/$movieId");
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            MovieScreen(
+                                                                movieId:
+                                                                    movieId)));
+                                              }),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
                           const SizedBox(height: 20),
                           Text(
                             "Popular Movies",
@@ -215,7 +290,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                             (_moviesPopular.length / 6);
                                 return SizedBox(
                                   height: gridHeight,
-                                  child: PopularMoviesWidget(
+                                  child: MoviesWidget(
                                     isLoading: state is LandingPopularLoading,
                                     popularMovies: _moviesPopular,
                                   ),
