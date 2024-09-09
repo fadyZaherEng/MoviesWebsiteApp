@@ -20,7 +20,9 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse =
-          await _landingApiServices.getPlayNow(request, queryParametersRequest);
+          await _landingApiServices.getPlayNow(
+              // request,
+              queryParametersRequest);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
@@ -44,7 +46,8 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getTopRated(
-          request, queryParametersRequest);
+          // request,
+          queryParametersRequest);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
@@ -68,7 +71,9 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse =
-          await _landingApiServices.getPopular(request, queryParametersRequest);
+          await _landingApiServices.getPopular(
+              // request,
+              queryParametersRequest);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
@@ -92,7 +97,8 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getUpcoming(
-          request, queryParametersRequest);
+          // request,
+          queryParametersRequest);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
@@ -116,7 +122,8 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.searchMovies(
-          request, queryParametersRequest);
+          // request,
+          queryParametersRequest);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: (httpResponse.data.result ?? []).mapToDomain(),
@@ -140,7 +147,8 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getMovieDetailsById(
-          request, queryParametersRequest, movieId);
+          // request,
+          queryParametersRequest, movieId);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(
           data: Movie.fromJson(httpResponse.response.data ?? {}),
@@ -164,7 +172,7 @@ class LandingRepositoryImplementation implements LandingRepository {
     try {
       TMDBRequest request = await TMDBRequest().createRequest(null);
       final httpResponse = await _landingApiServices.getSimilarById(
-        request,
+        // request,
         queryParametersRequest,
         movieId,
       );

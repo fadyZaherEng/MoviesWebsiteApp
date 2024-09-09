@@ -24,7 +24,6 @@
   },
   "hosting": {
     "public": "build/web",
-    "site": "my-movie",
     "ignore": [
       "firebase.json",
       "**/.*",

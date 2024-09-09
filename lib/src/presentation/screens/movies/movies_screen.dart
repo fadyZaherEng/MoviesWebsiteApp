@@ -182,7 +182,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                   1.25 *
                                   (_currentMovies.length / 5);
                           return SizedBox(
-                            height: gridHeight,
+                            // height: gridHeight,
                             child: MoviesWidget(
                               isLoading: state is LandingPopularLoading,
                               movies: _currentMovies,

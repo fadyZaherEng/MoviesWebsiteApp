@@ -35,6 +35,7 @@ class _MoviesWidgetState extends State<MoviesWidget> {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: const Responsive().isMobile(context)
             ? 2
@@ -78,11 +79,10 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                   transform: _hoverIndex == index
                       ? (Matrix4.identity()
                         ..scale(1.05, 1.05)
-                        ..translate(0, -10))
+                         ..translate(0.0, -10.0))
                       : Matrix4.identity(),
                   child: GestureDetector(
                     onTap: () {
-                      // widget.onMovieTap(index);
                       if (widget.isMoviesScreen) {
                         if (kIsWeb) {
                           widget.onMovieTap(index);
