@@ -288,28 +288,16 @@ class _MovieScreenState extends State<MovieScreen> {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    double gridHeight = state is LandingPopularLoading
-                        ? (constraints.maxWidth / 5) * 1.25 * 3
-                        : (constraints.maxWidth / 5) *
-                        1.25 *
-                        (_similarMovies.length / 5);
-                    return SizedBox(
-                      // height: gridHeight,
-                      child: MoviesWidget(
-                        isLoading: state is LandingPopularLoading,
-                        movies: _similarMovies,
-                        onMovieTap: (int movieId) {
-                          context.go("${Routes.movie}/$movieId");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    MovieScreen(movieId: movieId)),
-                          );
-                        },
-                      ),
+                child: MoviesWidget(
+                  isLoading: state is LandingPopularLoading,
+                  movies: _similarMovies,
+                  onMovieTap: (int movieId) {
+                    context.go("${Routes.movie}/$movieId");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MovieScreen(movieId: movieId)),
                     );
                   },
                 ),
