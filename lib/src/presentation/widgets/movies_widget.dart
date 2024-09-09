@@ -79,7 +79,7 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                   transform: _hoverIndex == index
                       ? (Matrix4.identity()
                         ..scale(1.05, 1.05)
-                        ..translate(0, -10))
+                         ..translate(0.0, -10.0))
                       : Matrix4.identity(),
                   child: GestureDetector(
                     onTap: () {
