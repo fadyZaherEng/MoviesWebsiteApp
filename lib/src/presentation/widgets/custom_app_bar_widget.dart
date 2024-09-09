@@ -58,7 +58,6 @@ class _State extends State<CustomAppBarWidget> {
                 if (kIsWeb) {
                   // context.go(Routes.landingWeb);
                   html.window.location.reload();
-
                 } else {
                   // Navigator.popUntil(context, (route) => true);
                   RestartWidget.restartApp(context);
@@ -105,11 +104,8 @@ class _State extends State<CustomAppBarWidget> {
                     hoverColor: ColorSchemes.white,
                     prefixIcon: const Padding(
                       padding: EdgeInsets.all(10.0),
-                      child: Icon(
-                        Icons.clear,
-                        color: ColorSchemes.gray,
-                        size: 15,
-                      ),
+                      child:
+                          Icon(Icons.clear, color: ColorSchemes.gray, size: 15),
                     ),
                     suffixIcon: InkWell(
                       onTap: () {
