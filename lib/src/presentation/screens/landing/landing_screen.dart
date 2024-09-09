@@ -287,7 +287,7 @@ class _LandingWebScreenState extends BaseState<LandingScreen> {
                                             1.25 *
                                             (_moviesPopular.length / 6);
                                 return SizedBox(
-                                  height: gridHeight,
+                                  // height: gridHeight,
                                   child: MoviesWidget(
                                     isLoading: state is LandingPopularLoading,
                                     movies: _moviesPopular,

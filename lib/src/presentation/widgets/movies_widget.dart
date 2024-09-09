@@ -35,6 +35,7 @@ class _MoviesWidgetState extends State<MoviesWidget> {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: const Responsive().isMobile(context)
             ? 2
