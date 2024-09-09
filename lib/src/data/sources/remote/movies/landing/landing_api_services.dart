@@ -14,44 +14,44 @@ abstract class LandingApiServices {
 
   @GET(APIKeys.playNow)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getPlayNow(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
   );
 
   @GET(APIKeys.topRated)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getTopRated(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
   );
 
   @GET(APIKeys.popular)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getPopular(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
   );
 
   @GET(APIKeys.upcoming)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getUpcoming(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
   );
 
   @GET(APIKeys.search)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> searchMovies(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
   );
 
   @GET(APIKeys.details)
   Future<HttpResponse<TMDBResponse<RemoteMovies>>> getMovieDetailsById(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
     @Path("movie_id") int movieId,
   );
 
   @GET(APIKeys.similar)
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getSimilarById(
-    @Body() TMDBRequest request,
+    // @Body() TMDBRequest request,
     @Queries() QueryParametersRequest queryParametersRequest,
     @Path("movie_id") int movieId,
   );

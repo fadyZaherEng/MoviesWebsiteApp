@@ -20,15 +20,12 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getPlayNow(
-    TMDBRequest<dynamic> request,
-    QueryParametersRequest queryParametersRequest,
-  ) async {
+      QueryParametersRequest queryParametersRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
       method: 'GET',
@@ -61,15 +58,12 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getTopRated(
-    TMDBRequest<dynamic> request,
-    QueryParametersRequest queryParametersRequest,
-  ) async {
+      QueryParametersRequest queryParametersRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
       method: 'GET',
@@ -102,15 +96,12 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getPopular(
-    TMDBRequest<dynamic> request,
-    QueryParametersRequest queryParametersRequest,
-  ) async {
+      QueryParametersRequest queryParametersRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
       method: 'GET',
@@ -143,15 +134,12 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getUpcoming(
-    TMDBRequest<dynamic> request,
-    QueryParametersRequest queryParametersRequest,
-  ) async {
+      QueryParametersRequest queryParametersRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
       method: 'GET',
@@ -184,15 +172,12 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> searchMovies(
-    TMDBRequest<dynamic> request,
-    QueryParametersRequest queryParametersRequest,
-  ) async {
+      QueryParametersRequest queryParametersRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
       method: 'GET',
@@ -225,7 +210,6 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<RemoteMovies>>> getMovieDetailsById(
-    TMDBRequest<dynamic> request,
     QueryParametersRequest queryParametersRequest,
     int movieId,
   ) async {
@@ -233,8 +217,7 @@ class _LandingApiServices implements LandingApiServices {
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<RemoteMovies>>>(Options(
       method: 'GET',
@@ -262,7 +245,6 @@ class _LandingApiServices implements LandingApiServices {
 
   @override
   Future<HttpResponse<TMDBResponse<List<RemoteMovies>>>> getSimilarById(
-    TMDBRequest<dynamic> request,
     QueryParametersRequest queryParametersRequest,
     int movieId,
   ) async {
@@ -270,8 +252,7 @@ class _LandingApiServices implements LandingApiServices {
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(queryParametersRequest.toJson());
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson((value) => value));
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<TMDBResponse<List<RemoteMovies>>>>(Options(
       method: 'GET',
