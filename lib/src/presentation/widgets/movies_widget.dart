@@ -83,7 +83,6 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                       : Matrix4.identity(),
                   child: GestureDetector(
                     onTap: () {
-                      // widget.onMovieTap(index);
                       if (widget.isMoviesScreen) {
                         if (kIsWeb) {
                           widget.onMovieTap(index);
