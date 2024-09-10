@@ -15,6 +15,10 @@ import 'package:movies_website_apps/src/presentation/screens/landing/widgets/foo
 import 'package:movies_website_apps/src/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:movies_website_apps/src/presentation/widgets/custom_drawer.dart';
 
+//deploy command on vercel
+//flutter/bin/flutter build web --release
+//build/web
+//if cd flutter; then git pull && cd .. ; else git clone https://github.com/flutter/flutter.git; fi && ls && flutter/bin/flutter doctor && flutter/bin/flutter clean && flutter/bin/flutter config --enable-web
 class LandingScreen extends BaseStatefulWidget {
   const LandingScreen({super.key});
 
