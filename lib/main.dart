@@ -131,6 +131,7 @@ class _MyAppState extends State<MyApp> {
                       ],
                       title: "TMDB Movie Website",
                       debugShowCheckedModeBanner: false,
+
                       // theme: AppTheme(state.languageCode).light,
                       locale: state,
                     )
