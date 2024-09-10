@@ -11,6 +11,7 @@ class AppTheme {
   ThemeData get light {
     return ThemeData(
       useMaterial3: false,
+      backgroundColor: ColorSchemes.white,
       fontFamily: getFontFamily(),
       toggleableActiveColor: ColorSchemes.primary,
       appBarTheme: AppBarTheme(
