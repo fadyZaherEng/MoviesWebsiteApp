@@ -79,7 +79,7 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                   transform: _hoverIndex == index
                       ? (Matrix4.identity()
                         ..scale(1.05, 1.05)
-                         ..translate(0.0, -10.0))
+                        ..translate(0.0, -10.0))
                       : Matrix4.identity(),
                   child: GestureDetector(
                     onTap: () {
@@ -119,12 +119,13 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                                 errorWidget: (context, error, stackTrace) =>
-                                    const Icon(Icons.error, size: 100),
+                                    const Icon(Icons.error, size: 180),
                                 matchTextDirection: true,
                                 placeholder: (context, _) {
                                   return const SkeletonLine(
                                     style: SkeletonLineStyle(
                                       width: double.infinity,
+                                      height: double.infinity,
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(8),
                                         topRight: Radius.circular(8),
@@ -143,15 +144,15 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(widget.movies[index].title,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                          color: Colors.white,
-                                        ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis),
+                                Text(
+                                  widget.movies[index].title,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(color: Colors.white),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                                 const SizedBox(height: 15),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -161,16 +162,15 @@ class _MoviesWidgetState extends State<MoviesWidget> {
                                       color: Color(0xFFE2B216),
                                     ),
                                     Text(
-                                        widget.movies[index].voteAverage
-                                            .toString(),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.copyWith(
-                                              color: Colors.white,
-                                            ))
+                                      widget.movies[index].voteAverage
+                                          .toString(),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(color: Colors.white),
+                                    )
                                   ],
                                 ),
                                 const SizedBox(height: 6),
