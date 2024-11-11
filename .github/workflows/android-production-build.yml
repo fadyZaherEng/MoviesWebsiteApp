@@ -3,7 +3,7 @@ name: Android App Release Build
 on:
   push:
     branches:
-      - main
+      - development
     tags:
       - 'v*.*.*.prod'
 
