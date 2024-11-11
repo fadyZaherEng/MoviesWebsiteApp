@@ -11,11 +11,6 @@ jobs:
     name: Build and Publish Flutter App
     runs-on: ubuntu-latest
 
-    env:
-      # Configure Flutter & Android SDK paths
-      FLUTTER_HOME: ${{ runner.tool_cache }}/flutter
-      ANDROID_HOME: ${{ runner.tool_cache }}/android-sdk
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
