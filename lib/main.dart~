@@ -53,6 +53,13 @@ Future<void> main() async {
   runApp(
     const RestartWidget(MyApp()),
   );
+
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => const RestartWidget(MyApp()), // Wrap your app
+  //   ),
+  // );
 }
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
