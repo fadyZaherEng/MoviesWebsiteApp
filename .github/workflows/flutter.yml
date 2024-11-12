@@ -31,14 +31,14 @@ jobs:
 #        run: flutter test
 
       - name: Build APK
-        run: flutter build apk --debug
+        run: flutter build apk --release
 
       - name: Upload APK
         if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+            files: ${{ github.workspace }}/app.prod.aab
+            name: Release ${{ github.ref_name }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
