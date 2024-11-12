@@ -33,12 +33,20 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK
+#      - name: Upload APK
+#        if: success()
+#        uses: actions/upload-artifact@v3
+#        with:
+#            files: ${{ github.workspace }}/app.prod.aab
+#            name: Release ${{ github.ref_name }}
+      - name: Upload AAB
         if: success()
         uses: actions/upload-artifact@v3
         with:
-            files: ${{ github.workspace }}/app.prod.aab
-            name: Release ${{ github.ref_name }}
+          name: Release v1.1.2.prod
+          path: /home/runner/work/MoviesWebsiteApp/MoviesWebsiteApp/app.prod.aab  # Corrected to "path"
+          if-no-files-found: warn
+          include-hidden-files: false
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
