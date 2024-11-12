@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - development  # Run workflow on push to the main branch
+    tags:
+      - 'v*.*.*.prod'
   pull_request:
     branches:
-      - development  # Run workflow on pull requests to the main branch
+      - development
+    tags:
+      - 'v*.*.*.prod'  # Run workflow on pull requests to the main branch
 
 jobs:
   build:
