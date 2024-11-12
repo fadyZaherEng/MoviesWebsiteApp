@@ -4,13 +4,22 @@ on:
   push:
     branches:
       - development  # Run workflow on push to the main branch
+    tags:
+      - 'v*.*.*.prod'
+
   pull_request:
     branches:
       - development  # Run workflow on pull requests to the main branch
+    tags:
+      - 'v*.*.*.prod'
 
 jobs:
   build:
+    if: startsWith(github.ref, 'refs/tags/') && endsWith(github.ref, '.prod')
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
