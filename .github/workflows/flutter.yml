@@ -31,7 +31,7 @@ jobs:
 #        run: flutter test
 
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk --debug
 
       - name: Upload APK
         if: success()
@@ -45,3 +45,4 @@ jobs:
         with:
           files: ${{ github.workspace }}/app.prod.aab
           name: Release ${{ github.ref_name }}
+
