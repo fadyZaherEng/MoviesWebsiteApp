@@ -43,10 +43,10 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: Release v1.1.2.prod
-          path: /home/runner/work/MoviesWebsiteApp/MoviesWebsiteApp/app.prod.aab  # Corrected to "path"
-          if-no-files-found: warn
-          include-hidden-files: false
+          name: app.prod.apk
+          path: ${{ github.workspace }}/app.prod.apk
+#          if-no-files-found: warn
+#          include-hidden-files: false
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
