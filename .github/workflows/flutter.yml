@@ -1,9 +1,9 @@
-name: Flutter CI/CD
+name: Flutter App Release
 
 on:
   push:
     branches:
-      - development  # Run workflow on push to the main branch
+      - development
     tags:
       - 'v*.*.*.prod'
 
@@ -16,41 +16,24 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.3'
+          flutter-version: 'stable'
 
       - name: Install dependencies
         run: flutter pub get
 
-#      - name: Run tests
-#        run: flutter test
-
-      - name: Build APK
-        run: flutter build apk --release
-
-#      - name: Upload APK
-#        if: success()
-#        uses: actions/upload-artifact@v3
-#        with:
-#            files: ${{ github.workspace }}/app.prod.aab
-#            name: Release ${{ github.ref_name }}
-      - name: Upload AAB
-        if: success()
-        uses: actions/upload-artifact@v3
-        with:
-          name: app.prod.apk
-          path: ${{ github.workspace }}/app.prod.apk
-#          if-no-files-found: warn
-#          include-hidden-files: false
+      - name: Build Android app
+        run: |
+          flutter build appbundle --release
+          mv build/app/outputs/bundle/release/app-release.aab ${{ github.workspace }}/app.prod.aab
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ github.workspace }}/app.prod.aab
           name: Release ${{ github.ref_name }}
-
